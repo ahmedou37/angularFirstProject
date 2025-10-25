@@ -1,0 +1,1 @@
+export let notLenght:number

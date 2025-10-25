@@ -1,0 +1,177 @@
+<h2>Task List:</h2>
+<button mat-flat-button (click)="getTasks()" #getTasksButton>Get Tasks</button>
+<mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible1" [dataSource]="dataSource" class="mat-elevation-z8" matSort matPaginator>
+  <ng-container matColumnDef="id" >
+    <mat-header-cell  *matHeaderCellDef class="table1" mat-sort-header> ID </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef class="table1" mat-sort-header> Title </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator *ngIf="isTableVisible1" 
+               #paginator1
+               [pageSize]="5" 
+               [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               aria-label="Select page of tasks">
+</mat-paginator>
+
+
+<hr>
+<h2>Get Task by ID:</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Task ID</mat-label>
+  <input matInput type="number" [(ngModel)]="searchId" placeholder="Enter task ID to get"/>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="getTask()">Get Task</button>
+@if (task) {
+  <mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible2" [dataSource]="[task]" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+}
+<hr>
+<h2>Get Tasks by Status:</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Filtered</mat-label>
+  <mat-select matInput type="text" [(ngModel)]="status">
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="">Select Status</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="COMPLETED">completed</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="IN_PROGRESS">In Progress</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="OVERDUE">Overdue</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="getTasksByStatus()">Get Filtered Tasks</button>
+
+
+<mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible3" [dataSource]="dataSource1" class="mat-elevation-z8" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+  </ng-container>
+
+ <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator *ngIf="isTableVisible3" 
+               #paginator2
+               [pageSize]="5" 
+               [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               aria-label="Select page of completed tasks">
+</mat-paginator>
+
+
+<hr>
+<h2>Add Task:</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Title</mat-label>
+  <input matInput type="text" [(ngModel)]="addedTask!.title" placeholder="Enter task title"/>
+</mat-form-field> 
+<mat-form-field appearance="fill">
+  <mat-label>Description</mat-label>
+  <input matInput type="text" [(ngModel)]="addedTask!.description" placeholder="Enter description"/>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Status</mat-label>
+  <mat-select matInput type="text" [(ngModel)]="addedTask!.status">
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="">Select Status</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="PENDING">Pending</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="COMPLETED">completed</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="IN_PROGRESS">In Progress</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="OVERDUE">Overdue</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Dead Line</mat-label>
+  <input  matInput [matDatepicker]="picker" [(ngModel)]="addedTask!.deadline" placeholder="Choose a date" [min]="minDate">
+  <mat-datepicker-toggle  matSuffix [for]="picker" ></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addTask()">Add Task</button>
+
+<hr>
+<h2>Delete Task:</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Task ID</mat-label>
+  <input matInput type="number" [(ngModel)]="deletedId" placeholder="Enter task ID to delete"/>
+</mat-form-field>
+<button mat-raised-button color="warn" (click)="deleteTask()">Delete Task</button>
+
+<hr>
+<h2>Assign Task To User</h2>
+<mat-form-field appearance="fill">
+  <mat-label>User ID</mat-label>
+  <input matInput type="number" [(ngModel)]="userId" placeholder="Enter User ID"/>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Task ID</mat-label>
+  <input matInput type="number" [(ngModel)]="taskId" placeholder="Enter Task ID"/>
+</mat-form-field>
+<button mat-raised-button color="warn" (click)="assigneTaskToUser()">Assign</button>

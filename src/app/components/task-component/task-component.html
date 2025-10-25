@@ -1,0 +1,202 @@
+<h2>Task List:</h2>
+<button mat-flat-button (click)="getTasks()" #getTasksButton>Get Tasks</button>
+<mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible1" [dataSource]="dataSource" class="mat-elevation-z8" matSort matPaginator>
+  <ng-container matColumnDef="id" >
+    <mat-header-cell  *matHeaderCellDef class="table1" mat-sort-header> ID </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef class="table1" mat-sort-header> Title </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator *ngIf="isTableVisible1" 
+               #paginator1
+               [pageSize]="5" 
+               [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               aria-label="Select page of tasks">
+</mat-paginator>
+
+
+<hr>
+<h2>Get Task by ID:</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Task ID</mat-label>
+  <input matInput type="number" [(ngModel)]="searchId" placeholder="Enter task ID to get"/>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="getTask()">Get Task</button>
+@if (task) {
+  <mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible2" [dataSource]="[task]" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+}
+<hr>
+<h2>Get Tasks by Status:</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Filtered</mat-label>
+  <mat-select matInput type="text" [(ngModel)]="status">
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="">Select Status</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="COMPLETED">completed</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="IN_PROGRESS">In Progress</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="OVERDUE">Overdue</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="getTasksByStatus()">Get Filtered Tasks</button>
+
+
+<mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible3" [dataSource]="dataSource1" class="mat-elevation-z8" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+  </ng-container>
+
+ <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator *ngIf="isTableVisible3" 
+               #paginator2
+               [pageSize]="5" 
+               [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               aria-label="Select page of completed tasks">
+</mat-paginator>
+
+<hr>
+<h2>Update Task's Status</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Enter Task ID</mat-label>
+  <input 
+    matInput 
+    type="number" 
+    [(ngModel)]="updatedId" 
+    placeholder="Enter task's ID"
+    name="taskId">
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Status</mat-label>
+  <mat-select matInput type="text" [(ngModel)]="updatedStatus">
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="">Select Status</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="COMPLETED">completed</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="IN_PROGRESS">In Progress</mat-option>
+    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="OVERDUE">Overdue</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="updateTaskStatus()">Update Status</button>
+@if (updatedTask) {
+  <mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible4" [dataSource]="[updatedTask]" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
+    </ng-container>
+
+   <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef class="table1"> Description </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef class="table1"> Status </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.status}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="deadline">
+    <mat-header-cell *matHeaderCellDef class="table1"> Deadline </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{task.deadline}} </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+}
+
+<button mat-icon-button class="button"
+        (click)="getUnseenNotification()"
+        [matMenuTriggerFor]="textMenu"
+        matTooltip="Show notifications"
+        aria-label="Notifications button"
+        [matBadge]="notLenght"
+        matBadgeColor="warn">
+  <mat-icon>notifications</mat-icon>
+</button>
+
+<mat-menu #textMenu="matMenu" class="large-text-menu">
+  <div class="menu-content">
+      <div *ngFor="let notification of notifications" 
+           class="notification-item"> 
+        <mat-icon *ngIf="isUnseen(notification)">info</mat-icon>
+        <span>{{ notification.name }}</span>
+        <small>{{ notification.localDate}}</small>
+      </div>
+    </div>
+</mat-menu>

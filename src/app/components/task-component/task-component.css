@@ -1,0 +1,72 @@
+
+/* Custom badge styles */
+::ng-deep .mat-badge-content {
+  font-size: 11px !important;
+  width: 18px !important;
+  height: 18px !important;
+  line-height: 18px !important;
+  border-radius: 50% !important;
+}
+
+/* Specific color customization */
+::ng-deep .mat-badge-warn .mat-badge-content {
+  background-color: #f30c0c !important; /* Custom pink */
+  color: rgb(212, 202, 202) !important;
+}
+
+/* Position adjustment */
+::ng-deep .mat-badge-above-after .mat-badge-content {
+  top: -8px !important;
+  right: -8px !important;
+}
+/* ::ng-deep can style elements OUTSIDE your component
+Material components like datepicker are rendered outside your component in the global DOM (usually at the end of <body>). So without ::ng-deep, your component's CSS can't reach them. */
+
+
+.large-text-menu {
+  width: 400px;
+  max-width: 90vw;
+}
+
+.menu-content {
+  padding: 16px;
+  background-color: #5e5b5b;
+  color: white;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  color: white;
+}
+
+
+
+.notification-item mat-icon {
+  color: #c2e06d;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.notification-item span {
+  flex: 1;
+}
+
+
+.notification-item small {
+  font-size: 11px;
+}
+
+.button {
+  position: fixed;
+  /* z-index: 1000; */
+  top: 16px;
+  right: 16px;
+}
