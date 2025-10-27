@@ -13,8 +13,8 @@ export class WebsocketService {
   private notificationSubject = new Subject<any>();//Subject is both an Observable and an Observer.
   public notifications$ = this.notificationSubject.asObservable();//Turns the subject into a read-only Observable.
 
-  private messageSubject = new Subject<any>();
-  public messages$ = this.notificationSubject.asObservable();
+  private messageSubject = new Subject<string>();
+  public messages$ = this.messageSubject.asObservable();
 
   connect() {
     //“Use SockJS to make the connection,and use STOMP to talk over it.”
@@ -26,7 +26,7 @@ export class WebsocketService {
 
       onConnect: () => {
         console.log('✅ Connected to WebSocket');
-        // Subscribe to backend topic
+        //Subscribe to backend topic
         this.stompClient.subscribe('/topic/notification', (message: Message) => {
           const body = message.body ? JSON.parse(message.body) : null;
           this.notificationSubject.next(body);
@@ -37,10 +37,10 @@ export class WebsocketService {
           const body = message.body ? JSON.parse(message.body) : null;
           this.messageSubject.next(body);
         });
-       // Activate connection
-        this.stompClient.activate();
-      },
-    })
+      }
+    });
+    // Activate connection
+    this.stompClient.activate();
   }
 
   sendMessage(msg: string) {

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './test-component.css'
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  messages: any[] = [];
+  messages: string[] = [];
   newMessage = '';
   sub!: Subscription;
 
