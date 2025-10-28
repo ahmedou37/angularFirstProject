@@ -9,14 +9,13 @@ import { jwtDecode } from 'jwt-decode';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface JwtPayload {
   sub: string;   // the username (subject)
-  authorities?: string[]; // optional role if you included it in the token
   roles?: string[]; // optional roles if you included them in the token
-  role?: string; // optional role if you included it in the token
-  exp?: number;
-  iat?: number;
+  // exp?: number;
+  // iat?: number;
 }
 
 
@@ -32,53 +31,62 @@ export class LoginComponent {
   name = '';
   password = '';
   response = '';
+  blank='';
 
   private http = inject(HttpClient);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
   login() {
+    this.checkNote()
     localStorage.removeItem('token')
     this.http.post('http://localhost:8080/users/login', {
     name: this.name,
     password: this.password
   },{responseType:'text'}).subscribe({
     next: (token) => {
+
       localStorage.setItem('token', token);
 
+      const decoded = jwtDecode<JwtPayload>(token);      
       
-
-
-      const decoded = jwtDecode<JwtPayload>(token);
-      
-         
-      
-      // Handle Spring Security role format
-      let userRole: string | undefined;
-      
-      if (decoded.authorities && decoded.authorities.length > 0) {
-        // Extract role from authorities array (remove "ROLE_" prefix)
-        userRole = decoded.authorities[0].replace('ROLE_', '');
-        console.log('Role from authorities:', userRole);
-      } else if (decoded.role) {
-        userRole = decoded.role;
-        console.log('Role from role field:', userRole);
-      } else if (decoded.roles && decoded.roles.length > 0) {
-        userRole = decoded.roles[0];
-        console.log('Role from roles array:', userRole);
-      }
-      
-      console.log('Final User Role:', userRole);
-
-      console.log("final role:", decoded.roles);
+      // let userRole: string | undefined;    
+      // if (decoded.roles && decoded.roles.length > 0) {
+      //   userRole = decoded.roles[0];
+      // }  
+      // console.log('User Role:', userRole);
 
       
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] ;//|| '/hello';
         this.router.navigate([returnUrl]);
       },
-      error: () => this.response = 'Login failed'
+      error: () =>{
+       this.response = 'Login failed',
+       this.errorSnackbar(this.response)
+      }
     });
   }
+  constructor(private snackbar:MatSnackBar){}
+  
+  errorSnackbar(error:string){
+    this.snackbar.open(error,`close`,{
+      duration:1000,
+    })
+  }
+
+  nameNote=''
+  passwordNote=''
+  checkNote(){
+    this.nameNote=''
+    this.passwordNote=''
+    if(this.name.length==0){
+      this.nameNote='*username requiered'
+    }
+    if(this.password.length<4){
+      this.passwordNote='*password should contains minimum 4 letters'
+    }
+  }
+
 }
 
 // ActivatedRoute is Angular's way of giving you information about the current route/URL. It's like a "URL reader" that can tell you:

@@ -5,13 +5,15 @@
     <div class="login-backround">
     <div class="login-form">
     <h2>Login Now</h2>
-    <input class="login-item" [(ngModel)]="name" name="name" placeholder="Enter Username" required />
-    <input class="login-item" [(ngModel)]="password" name="password" type="password" placeholder="Enter Password" required />
-    <button id="button" color="primary" (click)="login()" class="login">LOGIN</button>
+    <input class="login-input" [(ngModel)]="name" name="name" placeholder="Enter Username" required />
+    <p class="note" id="username-note" *ngIf="nameNote!==blank">{{nameNote}}</p>
+    <input class="login-input" [(ngModel)]="password" name="password" type="password" placeholder="Enter Password" required />
+    <p class="note" *ngIf="passwordNote!==blank" >{{passwordNote}}</p>
+    <button id="login-button" color="primary" (click)="login()" class="login">LOGIN</button>
     <p>Or Login With </p>
     <div class="icon-container">
         <div class="icon"><mat-icon >facebook</mat-icon><a class="icon-text">Facebook</a></div>
-        <div class="icon"><mat-icon>Google</mat-icon><a class="icon-text">Google</a></div>
+        <div class="icon"><mat-icon>language</mat-icon><a class="icon-text">Google</a></div>
     </div>
     <div class="text-container">
         <p >Not a member? </p>

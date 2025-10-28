@@ -23,11 +23,11 @@
     margin: 0 auto;
     border-radius: 35px;
     align-items: center;
-    position: relative;
-    top: 17px;
+    /* position: relative; */
+    /* top: 17px; */
     max-width: 500px;
     margin-left: 40px;
-    margin-top: 40px;
+    margin-top: 60px;
     color: white;
 }
 
@@ -53,21 +53,35 @@ h1{
     transform: rotate(180deg);
 }
 
-.login-item{
-    background-color: rgb(213, 227, 241);
-    border-radius: 10px;
-    display: flex;
-    width: 70%;
-    height: 7%;
-    margin-top: 10px;
-}
+
 h2{
     margin:  40px;
     font-size: 35px;
     color: white;
 }
-#button{
-    margin :20px;
+
+.login-input{
+    background-color: rgb(213, 227, 241);
+    border-radius: 10px;
+    display: flex;
+    width: 63%;
+    height: 7%;
+    margin-top: 10px;
+    /* margin-bottom: 10px; */
+    font-size: 20px;
+    padding-left:20px ;
+}
+.note{
+    margin: 0px;
+    color: rgb(228, 11, 11);
+}
+#username-note{
+    padding-right: 150px;
+}
+
+
+#login-button{
+    margin :10px;
     background-color: blue;
     color: white;
     width:70% ;
@@ -119,7 +133,4 @@ mat-icon{
 }
 .icon-text{
     margin:5px;
-}
-body{
-    margin:0;
 }
