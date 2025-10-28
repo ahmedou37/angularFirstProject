@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login-component/login-component';
 import { DashboardComponent } from './components/dashboard-component/dashboard-component';
 import { TaskComponent } from './components/task-component/task-component';
 import { AdminComponent } from './components/admin-component/admin-component';
-import { ChatComponent } from './components/test-component/test-component';
+import { MessageComponent } from './components/message-component/message-component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +13,6 @@ export const routes: Routes = [
   {path:'tasks',component:TaskComponent,canActivate:[authGuard]},
   {path:'admin',component:AdminComponent,canActivate:[authGuard]},
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path:'message',component:ChatComponent, canActivate:[authGuard]}
+  {path:'message',component:MessageComponent, canActivate:[authGuard]}
   // { path: '**', redirectTo: 'login' },
 ];

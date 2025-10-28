@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy, NgModule } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from '../../services/test/test-service/test';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { WebsocketService } from '../../services/socket-service/socket-service';
 
 @Component({
   selector: 'app-test-component',
   imports: [CommonModule,FormsModule],
-  templateUrl: './test-component.html',
-  styleUrl: './test-component.css'
+  templateUrl: './message-component.html',
+  styleUrl: './message-component.css'
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class MessageComponent implements OnInit, OnDestroy {
   messages: string[] = [];
   newMessage = '';
   sub!: Subscription;

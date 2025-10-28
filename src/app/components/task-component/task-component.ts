@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { Subscription } from 'rxjs';
-import { WebsocketService } from '../../services/test/test-service/test';
+import { WebsocketService } from '../../services/socket-service/socket-service';
 
 
 @Component({

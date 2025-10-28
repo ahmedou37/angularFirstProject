@@ -1,1 +1,22 @@
-<p>login-component works!</p>
+<div class="container">
+    <div class="title">
+    <h1 >Wellcom - Login Page</h1>
+    </div>
+    <div class="login-backround">
+    <div class="login-form">
+    <h2>Login Now</h2>
+    <input class="login-item" [(ngModel)]="name" name="name" placeholder="Enter Username" required />
+    <input class="login-item" [(ngModel)]="password" name="password" type="password" placeholder="Enter Password" required />
+    <button id="button" color="primary" (click)="login()" class="login">LOGIN</button>
+    <p>Or Login With </p>
+    <div class="icon-container">
+        <div class="icon"><mat-icon >facebook</mat-icon><a class="icon-text">Facebook</a></div>
+        <div class="icon"><mat-icon>Google</mat-icon><a class="icon-text">Google</a></div>
+    </div>
+    <div class="text-container">
+        <p >Not a member? </p>
+        <a id="signup" > Signup now</a>
+    </div>
+   </div>
+   </div>
+</div>

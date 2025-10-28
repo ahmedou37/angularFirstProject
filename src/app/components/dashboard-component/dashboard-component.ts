@@ -23,8 +23,8 @@ import { Task } from '../../model/Task';
   styles:[`
     .h2{
       display: flex;
-      justify-content: center; //Centers horizontally 
-      //align-items: center;    // Centers vertically 
+      justify-content: center; /*Centers horizontally */
+      /*align-items: center;    Centers vertically */
       margin: 50px; 
       padding-top:50px;
     }

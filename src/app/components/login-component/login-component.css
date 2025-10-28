@@ -1,0 +1,125 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 800px;
+}
+
+.login-backround{
+    /* background-image: url("https://wallpaperaccess.com/full/5313605.jpg");
+    background-size: cover;       */
+    display: flex;
+    justify-content: start;
+    background-color: rgb(215, 233, 250);
+    width: 100% ;
+
+}
+.login-form{
+    background-color: rgb(118, 163, 247);
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    border-radius: 35px;
+    align-items: center;
+    position: relative;
+    top: 17px;
+    max-width: 500px;
+    margin-left: 40px;
+    margin-top: 40px;
+    color: white;
+}
+
+.title{
+    background-color: rgb(29, 29, 194);
+    color: white;
+    margin: 0;
+    display: flex;
+    width: 28%;
+    max-height: 800px;
+    max-width: 200px;
+    /* padding-bottom: 750px; */
+    align-items: center;
+    justify-content: center;
+    height: 800px;
+}
+h1{
+    position: relative;
+    white-space: nowrap;
+    font-size: 60px;
+    writing-mode: vertical-rl;
+    /* transform: scaleY(-1); */
+    transform: rotate(180deg);
+}
+
+.login-item{
+    background-color: rgb(213, 227, 241);
+    border-radius: 10px;
+    display: flex;
+    width: 70%;
+    height: 7%;
+    margin-top: 10px;
+}
+h2{
+    margin:  40px;
+    font-size: 35px;
+    color: white;
+}
+#button{
+    margin :20px;
+    background-color: blue;
+    color: white;
+    width:70% ;
+    height: 10%;
+    border-radius: 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+
+.icon-container{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    height: 7%;
+}
+
+.icon{
+    background-color: rgb(213, 227, 241);
+    border-radius: 7px;
+    margin-top: 10px;
+    color: blue;
+    width: 40%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+}
+
+.text-container{
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    height: 7%;
+}
+#signup{
+    position: relative;
+    top: 15px;
+    margin-left: 3px;
+    color: yellow;
+    text-decoration: underline;
+    cursor: pointer;
+}
+p{
+    color: black;
+}
+mat-icon{
+    margin-right: 3px;
+}
+.icon-text{
+    margin:5px;
+}
+body{
+    margin:0;
+}

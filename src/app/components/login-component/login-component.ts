@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface JwtPayload {
   sub: string;   // the username (subject)
@@ -23,22 +24,9 @@ export interface JwtPayload {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule,MatButtonModule,MatInputModule],
-  template: `
-    <h2>Login</h2>
-    <form >
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="name" name="name" required />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="password" name="password" type="password" required />
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="login()">Login</button>
-    </form>
-    <p>{{ response }}</p>
-  `
+  imports: [FormsModule, CommonModule, HttpClientModule,MatButtonModule,MatInputModule,MatIconModule],
+  templateUrl: `login-component.html`,
+  styleUrl:`login-component.css`
 })
 export class LoginComponent {
   name = '';

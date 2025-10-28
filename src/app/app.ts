@@ -11,6 +11,5 @@ export class App {
   protected readonly title = signal('login');
   constructor(){
     localStorage.removeItem('token');
-    console.log("token removed")
   }
 }
