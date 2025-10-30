@@ -37,7 +37,7 @@
   </div>
 
   <button mat-button class="header-button" [mat-menu-trigger-for]="menu">modify</button>
-    <mat-menu id="menu" #menu="matMenu" [hasBackdrop]="false">
+    <mat-menu style="background-color: black;" class="menu" #menu="matMenu" [hasBackdrop]="false">
     <input matinput type="number" placeholder="Enter Tasks's Id" (click)="$event.stopPropagation()" [(ngModel)]="updatedId" ><br>
     <mat-select id="updatedStatus" class="header-button" 
       [(ngModel)]="updatedStatus" placeholder="Select Status"
@@ -49,10 +49,9 @@
         <mat-option value="OVERDUE">Overdue</mat-option>
       </mat-select><br>
       <button class="cancel">cancel</button>
-      <button class="header-button" (click)="updateTaskStatus()" >confirm</button>
+      <button style="margin-right: 0px;" class="header-button" (click)="updateTaskStatus()" >confirm</button>
     </mat-menu>
 </div>
-<hr>
 
 
 <div class="tasks-list">
@@ -129,6 +128,9 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+}
+@else {
+  <h3>No Task Found With That Id</h3>
 }
 }
 
@@ -214,7 +216,6 @@
 
 
 
-
 <button  mat-icon-button class="button"
         (click)="getUnseenNotification()"
         [matMenuTriggerFor]="textMenu"
@@ -222,8 +223,8 @@
         aria-label="Notifications button"
         [matBadge]="notLenght"
         matBadgeColor="warn"
-        style="background-color: rgb(19, 19, 112);">
-  <mat-icon style="background-color: rgb(19, 19, 112);" style="color: white;">notifications</mat-icon>
+        >
+  <mat-icon style="color: rgb(188, 190, 69);">notifications</mat-icon>
 </button>
 
 <mat-menu #textMenu="matMenu" class="large-text-menu">

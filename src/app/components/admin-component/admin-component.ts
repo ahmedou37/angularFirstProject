@@ -1,22 +1,25 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject,  ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task-service/task-service';
 import { Task } from '../../model/Task';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
 import { AdminService } from '../../services/admin-service/admin-service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
 @Component({
   selector: 'app-admin-component',
-  imports: [FormsModule, MatButton, MatInputModule, MatTableModule, NgIf ,
-  MatSortModule,MatPaginator,MatSelectModule,MatInputModule,MatSnackBarModule,
-  MatDatepickerModule],
+  imports: [FormsModule, MatInputModule, MatTableModule, NgIf ,
+  MatSortModule,MatPaginator,MatSelectModule,MatInputModule,MatIconModule,
+  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule],
   templateUrl: './admin-component.html',
   styleUrl: './admin-component.css'
 })
@@ -40,7 +43,7 @@ export class AdminComponent {
   deletedId?:number
   userId?:number
   taskId?:number
-  status:string='PENDING'
+  status?:string|null
   filteredTasks:Task[]=[]
   minDate=new Date()
 
@@ -55,14 +58,25 @@ export class AdminComponent {
       }
       this.dataSource.paginator = this.paginator1;
     });
-   this.isTableVisible1 = !this.isTableVisible1;
+    this.isTableVisible1 =true;
+    this.isTableVisible2 = false;
+    this.isTableVisible3=false;
+    this.isTableVisible4=false;
+    this.displayPlaceholder1=true
+    this.displayPlaceholder2=true
+    this.searchId=0
+    this.status=null
   }
 
   getTask(){
     this.service.getTask(this.searchId).subscribe(data=>{
       this.task=data;
     });
-    this.isTableVisible2 = !this.isTableVisible2;
+    this.isTableVisible2 = true;
+    this.isTableVisible1=false;
+    this.isTableVisible3=false;
+    this.isTableVisible4=false;
+    this.displayPlaceholder1=false;
   }
 
   getTasksByStatus(){
@@ -74,7 +88,11 @@ export class AdminComponent {
       }
       this.dataSource1.paginator = this.paginator2;
     });
-    this.isTableVisible3 = !this.isTableVisible3;
+    this.isTableVisible2 = false;
+    this.isTableVisible1=false;
+    this.isTableVisible3=true;
+    this.isTableVisible4=false;
+    this.displayPlaceholder2=false
   }
   assigneTaskToUser() {
     this.service.assignTaskToUser(this.userId, this.taskId).subscribe(data => {
@@ -106,6 +124,7 @@ export class AdminComponent {
 
 
   constructor(private snackBar:MatSnackBar) {
+    this.getTasks()
     this.dataSource = new MatTableDataSource(this.tasks);
     this.dataSource1 = new MatTableDataSource(this.filteredTasks);
   }
@@ -134,6 +153,32 @@ export class AdminComponent {
     duration: 4000,
     panelClass:['Snackbar']
    });
-}
+  }
+
+
+
+
+  statusChange(selectedValue: string) {
+      if (selectedValue === '') {
+       this.getTasks(); 
+       this.displayPlaceholder2=true
+      } else {
+        this.getTasksByStatus();
+        this.displayPlaceholder2=false
+      }
+    }   
+    idChange(selectedValue: number) {
+      if (selectedValue == 0) {
+       this.getTasks();
+       this.displayPlaceholder1=true
+      } else {
+        this.getTask();
+        this.displayPlaceholder1=false
+      }
+    }   
+    displayPlaceholder1:boolean=true
+    displayPlaceholder2:boolean=true
+
+    numbers = new Array(100).fill(0).map((_, i) => i + 1);
 
 }
