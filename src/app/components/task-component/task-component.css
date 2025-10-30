@@ -1,3 +1,148 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  height: 100%; 
+  width: 100%;
+  min-height: 800px;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgb(43, 43, 153);
+}
+
+.tasks-list{
+  position: relative;
+  margin: 0px;
+  width: 100%;
+  background-color: rgb(110, 112, 230);
+  color: rgb(243, 242, 242);
+  /* left: 10%;
+  right: 10%; */
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  margin-left:30px;
+  margin-top: 20px;
+  margin-right: 60px;
+  
+}
+.header-button{
+  width: 90px;
+  border-radius: 15px;
+  border-color: #eee;
+  cursor: pointer;
+  font-size: 15px;
+  margin-right: 30px;
+  background-color: rgb(27, 43, 182);
+  color: white;
+  max-height: 25px;
+}
+
+
+#title{
+    background-color: rgb(14, 5, 139);
+    color: white;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    max-width: 200px;
+    align-items: center;
+    /* justify-content: center; */
+    height: 100hv;
+}
+h1{
+    /* position: relative; */
+    /* white-space: nowrap; */
+    font-size: 40px;
+    margin-bottom: 7px;
+    /* writing-mode: vertical-rl; */
+    /* transform: scaleY(-1); */
+    /* transform: rotate(180deg); */
+}
+a{
+  margin: 6px;
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+}
+
+
+.filter{
+  display: flex;
+  flex-direction: column;
+}
+.cancel{
+  width: 80px;
+  border-radius: 15px;
+  border-color: #eee;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 1px;
+  background-color: rgb(27, 43, 182);
+  color: white;
+}
+
+#updatedStatus{
+  width: 85%;
+  margin-top: 7px;
+  min-width: 30px;
+  margin-bottom: 10px;
+}
+
+input{
+  background-color: rgb(27, 43, 182);
+  color: white;
+  border-radius: 4px;
+  border-color: white;
+  min-height: 20px;
+}
+
+
+::ng-deep .mat-mdc-table .mat-mdc-cell,
+::ng-deep .mat-mdc-table .mat-mdc-header-cell {
+  color: white !important;
+}
+
+
+.modify {
+  /* This styles the button container */
+  background-color: rgb(42, 42, 44);
+}
+
+/* This styles the menu content */
+.modify-menu {
+  background-color: rgb(42, 42, 44) !important;
+  color: white;
+}
+
+/* Style the content inside the menu */
+.modify-menu .mat-menu-content {
+  background-color: rgb(42, 42, 44);
+  color: white;
+  padding: 16px;
+}
+
+/* Style form fields inside the menu */
+.modify-menu .mat-form-field {
+  width: 100%;
+}
+
+
+
+::ng-deep .mat-mdc-menu-panel {
+  background-color: rgb(49, 49, 197) !important; 
+  color: white !important;
+}
+
+
+
+
+
 
 /* Custom badge styles */
 ::ng-deep .mat-badge-content {
@@ -30,8 +175,8 @@ Material components like datepicker are rendered outside your component in the g
 
 .menu-content {
   padding: 16px;
-  background-color: #5e5b5b;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(19, 18, 18);
   max-height: 300px;
   overflow-y: auto;
 }
@@ -43,7 +188,7 @@ Material components like datepicker are rendered outside your component in the g
   gap: 12px;
   padding: 8px 0;
   border-bottom: 1px solid #eee;
-  color: white;
+  color: rgb(11, 12, 12);
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, viewChild, ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task-service/task-service';
 import { Task } from '../../model/Task';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { Notification } from '../../model/Notifications';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../services/socket-service/socket-service';
@@ -20,9 +20,9 @@ import { WebsocketService } from '../../services/socket-service/socket-service';
 @Component({
   selector: 'app-task-component',
   standalone: true,
-  imports: [FormsModule, MatButton, MatInputModule, MatTableModule, NgIf ,
+  imports: [FormsModule, MatInputModule, MatTableModule, NgIf ,
   MatSortModule,MatPaginator,MatSelectModule,MatInputModule,MatIconModule,
-  MatMenuModule,MatBadgeModule,CommonModule],
+  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule],
   templateUrl: './task-component.html',
   styleUrls: ['./task-component.css']
 })
@@ -38,10 +38,10 @@ export class TaskComponent {
     status:''
     
     }
-  status:string=''
+  status:string|null=null
   filteredTasks:Task[]=[]
 
-  updatedStatus:string=''
+  updatedStatus:string|null=''
   updatedId?:number
   updatedTask:Task={
     title:'',
@@ -60,33 +60,50 @@ export class TaskComponent {
       }
       this.dataSource.paginator = this.paginator1;
     });
-   this.isTableVisible1 = !this.isTableVisible1;
+    this.status=null;
+    this.searchId=0
+    this.isTableVisible1 = true;
+    this.isTableVisible2=false;
+    this.isTableVisible3=false;
+    this.isTableVisible4=false;
+    this.displayPlaceholder1=true;
+    this.displayPlaceholder2=true;
   }
 
   getTask(){
     this.service.getTask(this.searchId).subscribe(data=>{
-      this.task=data;
+    this.task=data;
+    this.isTableVisible1=false
+    this.isTableVisible3=false
+    this.isTableVisible2=true
+    this.isTableVisible4=false
     });
-    this.isTableVisible2 = !this.isTableVisible2;
   }
 
   getTasksByStatus(){
     this.service.getTasksByStatus(this.status).subscribe(data=>{
       this.filteredTasks=data;
+      this.isTableVisible1=false;
+      this.isTableVisible2=false;
+      this.isTableVisible3 = true;
+      this.isTableVisible4=false
       this.dataSource1.data = this.filteredTasks;
       if (this.sort2) {
         this.dataSource1.sort = this.sort2;
       }
       this.dataSource1.paginator = this.paginator2;
     });
-    this.isTableVisible3 = !this.isTableVisible3;
   }
 
   updateTaskStatus(){
     this.service.updateTaskStatus(this.updatedId,this.updatedStatus).subscribe(data=>{
       this.updatedTask=data;
     });
-    this.isTableVisible4 = !this.isTableVisible4;
+    this.isTableVisible4 =true;
+    this.isTableVisible1=false;
+    this.isTableVisible2=false;
+    this.isTableVisible3=false;
+    this.updatedStatus=null;    
   }
 
 
@@ -103,6 +120,7 @@ export class TaskComponent {
   dataSource1: MatTableDataSource<Task> ;
 
   constructor(private websocketService: WebsocketService) {
+    this.getTasks()
     this.dataSource = new MatTableDataSource(this.tasks);
     this.dataSource1 = new MatTableDataSource(this.filteredTasks);
   }
@@ -163,4 +181,38 @@ export class TaskComponent {
       this.websocketService.disconnect();
     }
 
+
+    isGetTaskVisible=false;
+
+    numbers = new Array(100).fill(0).map((_, i) => i + 1);
+  
+    copmleted:string="COMPLETED"
+    anyStatus:String=this.copmleted|| "COMPLETED" || "PENDING" 
+
+    getList(){
+      this.isTableVisible1 = true;
+      this.isTableVisible2=false;
+      this.isTableVisible3=false
+    }
+
+    statusChange(selectedValue: string) {
+      if (selectedValue === '') {
+       this.getTasks(); 
+       this.displayPlaceholder2=true
+      } else {
+        this.getTasksByStatus();
+        this.displayPlaceholder2=false
+      }
+    }   
+    idChange(selectedValue: number) {
+      if (selectedValue == 0) {
+       this.getTasks();
+       this.displayPlaceholder1=true
+      } else {
+        this.getTask();
+        this.displayPlaceholder1=false
+      }
+    }   
+    displayPlaceholder1:boolean=true
+    displayPlaceholder2:boolean=true
 }

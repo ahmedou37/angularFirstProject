@@ -1,6 +1,63 @@
-<h2>Task List:</h2>
-<button mat-flat-button (click)="getTasks()" #getTasksButton>Get Tasks</button>
-<mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible1" [dataSource]="dataSource" class="mat-elevation-z8" matSort matPaginator>
+<div class="container">
+<div id="title">
+  <h1 >Taks List</h1>
+  <a href="admin" target="_blank">Tasks Management</a>
+  <a href="dashboard" target="_blank">Dashboard of Tasks</a>
+  <a href="tasks" target="_blank">Return to Login </a>
+</div>
+
+<div class="main">
+
+
+<div class="header">
+  <div class="filter">
+ <mat-select
+  class="header-button"
+  [(ngModel)]="searchId"
+  placeholder="Select Id"
+  (selectionChange)="idChange($event.value)">
+    @for (i of numbers; track $index) {
+      <mat-option [value]="i">{{ i }}</mat-option>
+    }
+  </mat-select>
+  <button *ngIf="displayPlaceholder1==false" (click)="getTasks()" class="cancel">Cancel</button>
+  </div>
+   
+  <div class="filter">
+  <mat-select class="header-button" 
+  [(ngModel)]="status" [placeholder]="displayPlaceholder2 ? 'Select Status' : ''"
+  (selectionChange)="statusChange($event.value)"
+  >
+    <mat-option value="COMPLETED">Completed</mat-option>
+    <mat-option value="PENDING">Pending</mat-option>
+    <mat-option value="IN_PROGRESS">In Progress</mat-option>
+    <mat-option value="OVERDUE">Overdue</mat-option>
+</mat-select>
+  <button *ngIf="displayPlaceholder2==false" (click)="getTasks()" class="cancel">Cancel</button>
+  </div>
+
+  <button mat-button class="header-button" [mat-menu-trigger-for]="menu">modify</button>
+    <mat-menu id="menu" #menu="matMenu" [hasBackdrop]="false">
+    <input matinput type="number" placeholder="Enter Tasks's Id" (click)="$event.stopPropagation()" [(ngModel)]="updatedId" ><br>
+    <mat-select id="updatedStatus" class="header-button" 
+      [(ngModel)]="updatedStatus" placeholder="Select Status"
+       (click)="$event.stopPropagation()"
+      >
+        <mat-option value="COMPLETED">Completed</mat-option>
+        <mat-option value="PENDING">Pending</mat-option>
+        <mat-option value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option value="OVERDUE">Overdue</mat-option>
+      </mat-select><br>
+      <button class="cancel">cancel</button>
+      <button class="header-button" (click)="updateTaskStatus()" >confirm</button>
+    </mat-menu>
+</div>
+<hr>
+
+
+<div class="tasks-list">
+@if (isTableVisible1==true) {
+<mat-table  *ngIf="isTableVisible1" [dataSource]="dataSource" class="table" matSort matPaginator>
   <ng-container matColumnDef="id" >
     <mat-header-cell  *matHeaderCellDef class="table1" mat-sort-header> ID </mat-header-cell>
     <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
@@ -29,6 +86,7 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
+
 <mat-paginator *ngIf="isTableVisible1" 
                #paginator1
                [pageSize]="5" 
@@ -36,17 +94,13 @@
                showFirstLastButtons
                aria-label="Select page of tasks">
 </mat-paginator>
+}
 
 
-<hr>
-<h2>Get Task by ID:</h2>
-<mat-form-field appearance="fill">
-  <mat-label>Task ID</mat-label>
-  <input matInput type="number" [(ngModel)]="searchId" placeholder="Enter task ID to get"/>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="getTask()">Get Task</button>
+
+@else if (isTableVisible2==true) {
 @if (task) {
-  <mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible2" [dataSource]="[task]" class="mat-elevation-z8">
+  <mat-table style="color:white" [dataSource]="[task]" class="table">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
       <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
@@ -76,26 +130,17 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 }
-<hr>
-<h2>Get Tasks by Status:</h2>
-<mat-form-field appearance="fill">
-  <mat-label>Filtered</mat-label>
-  <mat-select matInput type="text" [(ngModel)]="status">
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="">Select Status</mat-option>
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="COMPLETED">completed</mat-option>
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="IN_PROGRESS">In Progress</mat-option>
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="OVERDUE">Overdue</mat-option>
-  </mat-select>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="getTasksByStatus()">Get Filtered Tasks</button>
+}
 
 
-<mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible3" [dataSource]="dataSource1" class="mat-elevation-z8" matSort>
+
+
+@else if (isTableVisible3==true) {
+<mat-table style="color:white" *ngIf="isTableVisible3" [dataSource]="dataSource1" class="table" matSort>
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
     <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
   </ng-container>
-
   <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
     <mat-cell *matCellDef="let task"> {{task.title}} </mat-cell>
@@ -126,30 +171,14 @@
                showFirstLastButtons
                aria-label="Select page of completed tasks">
 </mat-paginator>
+}
 
-<hr>
-<h2>Update Task's Status</h2>
-<mat-form-field appearance="fill">
-  <mat-label>Enter Task ID</mat-label>
-  <input 
-    matInput 
-    type="number" 
-    [(ngModel)]="updatedId" 
-    placeholder="Enter task's ID"
-    name="taskId">
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Status</mat-label>
-  <mat-select matInput type="text" [(ngModel)]="updatedStatus">
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="">Select Status</mat-option>
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue" value="COMPLETED">completed</mat-option>
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="IN_PROGRESS">In Progress</mat-option>
-    <mat-option style="background-color: rgb(46, 43, 43); color:aliceblue"  value="OVERDUE">Overdue</mat-option>
-  </mat-select>
-</mat-form-field>
-<button mat-raised-button color="primary" (click)="updateTaskStatus()">Update Status</button>
+
+
+
+@else if (isTableVisible4==true){
 @if (updatedTask) {
-  <mat-table style="background-color: rgb(216, 213, 213);" *ngIf="isTableVisible4" [dataSource]="[updatedTask]" class="mat-elevation-z8">
+  <mat-table [dataSource]="[updatedTask]" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
       <mat-cell *matCellDef="let task"> {{task.id}} </mat-cell>
@@ -178,16 +207,23 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-}
+}}
+</div>
+</div>
+</div>
 
-<button mat-icon-button class="button"
+
+
+
+<button  mat-icon-button class="button"
         (click)="getUnseenNotification()"
         [matMenuTriggerFor]="textMenu"
         matTooltip="Show notifications"
         aria-label="Notifications button"
         [matBadge]="notLenght"
-        matBadgeColor="warn">
-  <mat-icon>notifications</mat-icon>
+        matBadgeColor="warn"
+        style="background-color: rgb(19, 19, 112);">
+  <mat-icon style="background-color: rgb(19, 19, 112);" style="color: white;">notifications</mat-icon>
 </button>
 
 <mat-menu #textMenu="matMenu" class="large-text-menu">

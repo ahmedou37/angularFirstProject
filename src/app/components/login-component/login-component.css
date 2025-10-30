@@ -63,6 +63,7 @@ h2{
 .login-input{
     background-color: rgb(213, 227, 241);
     border-radius: 10px;
+    border-color: aliceblue;
     display: flex;
     width: 63%;
     height: 7%;
