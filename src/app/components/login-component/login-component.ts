@@ -11,11 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-export interface JwtPayload {
-  sub: string;   // the username (subject)
-  roles?: string[]; // optional roles if you included them in the token
-  // exp?: number;
-  // iat?: number;
+export interface JwtUser {
+  sub: string;   
+  roles?: string[];
 }
 
 
@@ -48,15 +46,9 @@ export class LoginComponent {
 
       localStorage.setItem('token', token);
 
-      const decoded = jwtDecode<JwtPayload>(token);      
-      
-      // let userRole: string | undefined;    
-      // if (decoded.roles && decoded.roles.length > 0) {
-      //   userRole = decoded.roles[0];
-      // }  
-      // console.log('User Role:', userRole);
-
-      
+      // const decoded = jwtDecode<JwtUser>(token);      
+      // console.log(decoded.roles)
+            
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] ;//|| '/hello';
         this.router.navigate([returnUrl]);
       },

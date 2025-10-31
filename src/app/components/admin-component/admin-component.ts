@@ -13,13 +13,16 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AdminService } from '../../services/admin-service/admin-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouterLink } from '@angular/router';
+import { JwtUser } from '../login-component/login-component';
+import { jwtDecode } from 'jwt-decode';
 
 
 @Component({
   selector: 'app-admin-component',
   imports: [FormsModule, MatInputModule, MatTableModule, NgIf ,
   MatSortModule,MatPaginator,MatSelectModule,MatInputModule,MatIconModule,
-  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule],
+  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule ,RouterLink],
   templateUrl: './admin-component.html',
   styleUrl: './admin-component.css'
 })
@@ -38,7 +41,7 @@ export class AdminComponent {
   addedTask?:Task = {
     title: '',
     description:'',
-    status:'PENDING'   
+    status:''   
   }
   deletedId?:number
   userId?:number
@@ -95,6 +98,9 @@ export class AdminComponent {
     this.displayPlaceholder2=false
   }
   assigneTaskToUser() {
+    if (this.user.roles&&(this.user.roles[0]!="ROLE_ADMIN")) {
+      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);     
+    }
     this.service.assignTaskToUser(this.userId, this.taskId).subscribe(data => {
       this.assignedSnackbar(this.userId,this.taskId)
       //this.taskService.incrementNotLength()
@@ -102,9 +108,15 @@ export class AdminComponent {
      });
   }
   addTask(){
+    if (this.user.roles&&(this.user.roles[0]!="ROLE_ADMIN")) {
+      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);     
+    }
     this.service.addTask(this.addedTask).subscribe(data=>{this.addSnackbar(this.addedTask?.title)})
   }
   deleteTask() {
+    if (this.user.roles&&(this.user.roles[0]!="ROLE_ADMIN")) {
+      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);     
+    }
     this.service.deleteTask(this.deletedId).subscribe(data => {this.removeSnackbar(this.deletedId)});
   }
   
@@ -181,4 +193,7 @@ export class AdminComponent {
 
     numbers = new Array(100).fill(0).map((_, i) => i + 1);
 
+    token=localStorage.getItem('token')??'';
+    user=jwtDecode<JwtUser>(this.token);
 }
+    

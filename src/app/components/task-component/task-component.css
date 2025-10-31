@@ -37,17 +37,17 @@
   cursor: pointer;
   font-size: 15px;
   margin-right: 30px;
-  /* background-color: rgb(95, 99, 133); */
-  background-color: rgb(214, 215, 219);
+  /* background-color: rgb(214, 215, 219); */
+  background-color: rgb(245, 240, 240);
   color: black;
   max-height: 27px;
-  min-height: 27px;
+  min-height: 34px;
   font-size: 15px;
 }
 
 
 #title{
-    background-color: rgb(54, 69, 156);
+    background-color:rgb(54, 69, 156); /*#1e3a8a*/
     color: white;
     margin: 0;
     display: flex;
@@ -71,9 +71,19 @@ a{
   margin: 6px;
   text-decoration: none;
   color: white;
+  font-size: 18px;
+}
+.icon-menu{
+  margin-left: 0px;
+  padding: 0px;
+  margin-top: 5px;
+  position: relative;
+  top: 7px;
+}
+.menu-item{
+  margin-left: 0px;
   font-size: 17px;
 }
-
 
 .filter{
   display: flex;
@@ -88,7 +98,7 @@ a{
   min-height: 27px;
   font-size: 15px;
   margin-right: 3px;
-  background-color: rgb(214, 215, 219);
+  background-color: rgb(245, 240, 240);
   color: black;
 }
 
@@ -103,7 +113,8 @@ a{
 }
 
 input{
-  background-color: rgb(214, 215, 219);
+  /* background-color: rgb(214, 215, 219); */
+  background-color: rgb(245, 240, 240);
   color: rgb(24, 23, 23);
   border-radius: 4px;
   border-color: white;
@@ -157,7 +168,6 @@ h3{
 
 
 
-/* Custom badge styles */
 ::ng-deep .mat-badge-content {
   font-size: 11px !important;
   width: 18px !important;
@@ -166,13 +176,11 @@ h3{
   border-radius: 50% !important;
 }
 
-/* Specific color customization */
 ::ng-deep .mat-badge-warn .mat-badge-content {
   background-color: #f30c0c !important; /* Custom pink */
   color: rgb(212, 202, 202) !important;
 }
 
-/* Position adjustment */
 ::ng-deep .mat-badge-above-after .mat-badge-content {
   top: -8px !important;
   right: -8px !important;

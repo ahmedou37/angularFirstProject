@@ -1,8 +1,7 @@
-import { Component, inject, viewChild, ViewChild } from '@angular/core';
+import { Component, inject,  ViewChild } from '@angular/core';
 import { TaskService } from '../../services/task-service/task-service';
 import { Task } from '../../model/Task';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule, NgIf } from '@angular/common';
@@ -11,10 +10,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { Notification } from '../../model/Notifications';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../services/socket-service/socket-service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -22,7 +22,7 @@ import { WebsocketService } from '../../services/socket-service/socket-service';
   standalone: true,
   imports: [FormsModule, MatInputModule, MatTableModule, NgIf ,
   MatSortModule,MatPaginator,MatSelectModule,MatInputModule,MatIconModule,
-  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule],
+  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule ,RouterLink],
   templateUrl: './task-component.html',
   styleUrls: ['./task-component.css']
 })
@@ -182,18 +182,7 @@ export class TaskComponent {
     }
 
 
-    isGetTaskVisible=false;
-
     numbers = new Array(100).fill(0).map((_, i) => i + 1);
-  
-    copmleted:string="COMPLETED"
-    anyStatus:String=this.copmleted|| "COMPLETED" || "PENDING" 
-
-    getList(){
-      this.isTableVisible1 = true;
-      this.isTableVisible2=false;
-      this.isTableVisible3=false
-    }
 
     statusChange(selectedValue: string) {
       if (selectedValue === '') {
