@@ -52,10 +52,10 @@
     display: flex;
     flex-direction: column;
     width: 28%;
-    max-width: 200px;
+    max-width: 205px;
     align-items: center;
     /* justify-content: center; */
-    height: 100hv;
+    height: 100vh;
 }
 h1{
     /* position: relative; */
@@ -195,15 +195,16 @@ h3{
   border-radius:6px ;
   margin-bottom: 30px;
 }
-::ng-deep .snackbar .mdc-snackbar__action {
+
+::ng-deep  .mdc-snackbar__action {
   --mdc-text-button-hover-state-layer-color: transparent !important;
 }
 
-::ng-deep .snackbar .mdc-snackbar__action:hover {
+::ng-deep .mdc-snackbar__action:hover {
   background-color: white !important;
   color: #b8b1b1 !important;
 }
 
-::ng-deep .snackbar .mdc-snackbar__action:hover .mdc-button__label {
+::ng-deep  .mdc-snackbar__action:hover .mdc-button__label {
   color: #080808 !important;
 }

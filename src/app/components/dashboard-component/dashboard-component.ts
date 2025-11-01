@@ -3,43 +3,17 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
 import { AdminService } from '../../services/admin-service/admin-service';
 import { Task } from '../../model/Task';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 
 
 
 @Component({
   selector: 'app-dashboard-component',
-  imports: [BaseChartDirective],
-  template: `
-      <h2 class="h1">Tasks By Status:</h2>
-      <div class="piechart">
-        <canvas baseChart
-          [data]="pieChartData"
-          [type]="'pie'">
-        </canvas>
-      </div>
-      <h2 class="h2">Total Tasks Numbers : {{totalTasks}}</h2>
-  `,
-  styles:[`
-    .h2{
-      display: flex;
-      justify-content: center; /*Centers horizontally */
-      /*align-items: center;    Centers vertically */
-      margin: 50px; 
-      padding-top:50px;
-    }
-    .piechart{
-      display:flex;
-      padding:30px;
-      margin-top:0px;
-      align-items:center;
-      justify-content:center
-    }
-    .h1{
-      margin-top:15px;
-      margin-bottom:0px;
-    }
-  `]
+  imports: [BaseChartDirective,MatIconModule,RouterLink],
+  templateUrl:'./dashboard-component.html' ,
+  styleUrl:'./dashboard-component.css'
 })
 export class DashboardComponent {
   tasks:Task[]=[]
@@ -49,6 +23,7 @@ export class DashboardComponent {
   tasksCompleted = 0
   tasksPending= 0
   tasksInProgress = 0  
+  tasksOverdue=0
 
   ngOnInit() {
     this.service.getTasks().subscribe(data => {
@@ -60,12 +35,13 @@ export class DashboardComponent {
 
   updateChartData() {
     this.pieChartData = {
-      labels: ['PENDING','IN PROGRESS','COMPLETED'],
+      labels: ['PENDING','IN PROGRESS','COMPLETED','OVERDUE'],
       datasets: [{
         data: [
           this.tasksPending,
           this.tasksInProgress, 
           this.tasksCompleted,
+          this.tasksOverdue
         ],
       }]
     };
@@ -76,6 +52,7 @@ export class DashboardComponent {
     this.tasksCompleted = 0;
     this.tasksInProgress = 0;
     this.tasksPending = 0;
+    this.tasksOverdue=0
 
     for (const task of this.tasks) {
       
@@ -91,16 +68,18 @@ export class DashboardComponent {
         case 'COMPLETED':
           this.tasksCompleted +=1;
           break;
+        case 'OVERDUE':
+          this.tasksOverdue+=1
       }
     }
   }
 
 
   pieChartData:ChartData<'pie'>={
-    labels:['PENDING','IN PROGRESS','COMPLETED'],
+    labels:['PENDING','IN PROGRESS','COMPLETED','OVERDUE'],
     datasets:[
       {
-        data:[0, 0, 0]
+        data:[0, 0, 0,0]
       }
     ]
   }

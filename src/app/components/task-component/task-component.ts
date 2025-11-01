@@ -42,7 +42,7 @@ export class TaskComponent {
   filteredTasks:Task[]=[]
 
   updatedStatus:string|null=''
-  updatedId?:number
+  updatedId?:number|null
   updatedTask:Task={
     title:'',
     description:'',
@@ -68,6 +68,7 @@ export class TaskComponent {
     this.isTableVisible4=false;
     this.displayPlaceholder1=true;
     this.displayPlaceholder2=true;
+    this.displayPlaceholder3=true
   }
 
   getTask(){
@@ -98,12 +99,14 @@ export class TaskComponent {
   updateTaskStatus(){
     this.service.updateTaskStatus(this.updatedId,this.updatedStatus).subscribe(data=>{
       this.updatedTask=data;
+      this.displayPlaceholder3=false
     });
     this.isTableVisible4 =true;
     this.isTableVisible1=false;
     this.isTableVisible2=false;
     this.isTableVisible3=false;
-    this.updatedStatus=null;    
+    this.updatedStatus=null;  
+    this.updatedId=null
   }
 
 
@@ -204,4 +207,6 @@ export class TaskComponent {
     }   
     displayPlaceholder1:boolean=true
     displayPlaceholder2:boolean=true
+    displayPlaceholder3:boolean=true
+   
 }

@@ -33,6 +33,7 @@
 
 .title{
     background-color: rgb(29, 29, 194);
+    background-color:rgb(54, 69, 156);
     color: white;
     margin: 0;
     display: flex;
@@ -84,6 +85,7 @@ h2{
 #login-button{
     margin :10px;
     background-color: blue;
+    background-color:rgb(64, 84, 202);
     color: white;
     width:70% ;
     height: 10%;

@@ -3,9 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-
-
-import { jwtDecode } from 'jwt-decode';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +12,6 @@ export interface JwtUser {
   sub: string;   
   roles?: string[];
 }
-
 
 
 @Component({
@@ -45,10 +41,7 @@ export class LoginComponent {
     next: (token) => {
 
       localStorage.setItem('token', token);
-
-      // const decoded = jwtDecode<JwtUser>(token);      
-      // console.log(decoded.roles)
-            
+      
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] ;//|| '/hello';
         this.router.navigate([returnUrl]);
       },
@@ -78,7 +71,6 @@ export class LoginComponent {
       this.passwordNote='*password should contains minimum 4 letters'
     }
   }
-
 }
 
 // ActivatedRoute is Angular's way of giving you information about the current route/URL. It's like a "URL reader" that can tell you:

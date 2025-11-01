@@ -1,0 +1,77 @@
+#container{
+  display:flex;
+  flex-direction:row;
+  margin:0px;
+  overflow: hidden;
+  height: 100vh;
+}
+#title{
+   background-color: rgb(54, 69, 156);
+   color: white;
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+   width: 28%;
+   max-width: 205px;
+   align-items: center;
+}
+h1{
+   font-size: 33px;
+   margin-bottom: 7px;
+   display: flex;
+   white-space: nowrap;
+   max-width: 90%;
+   margin-right: 15px;
+}
+a{
+  margin: 6px;
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+}
+.icon-menu{
+  margin-left: 0px;
+  padding: 0px;
+  margin-top: 5px;
+  position: relative;
+  top: 7px;
+}
+.menu-item{
+  margin-left: 0px;
+  font-size: 17px;
+}
+
+.main{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  min-height:800px;
+  background-color: rgb(230, 228, 228);
+}
+
+.piechart{
+   display:flex;
+   justify-content:center;
+   max-width:600px;
+   max-height:600px;
+   min-width:400px;
+   min-height: 500px;
+   margin-top:30px;
+   /* margin-left: 12%; */
+}
+.h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin:40px;
+    margin-left: 150px;
+    background-color: rgb(245, 234, 234);
+    min-height: 50px;
+    max-width: 300px;
+}
+.pie-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 8%;
+}

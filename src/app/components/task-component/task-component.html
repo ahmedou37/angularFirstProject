@@ -1,7 +1,7 @@
 <div class="container">
 <div id="title">
   <h1 >Taks List</h1>
-  <a routerLink="/admin" class="menu-item" >Tasks Management<mat-icon class="icon-menu">list</mat-icon></a>
+  <a routerLink="/admin" class="menu-item" >Tasks Management<mat-icon class="icon-menu">manage</mat-icon></a>
   <a routerLink="/dashboard" class="menu-item">Tasks's Dashboard<mat-icon class="icon-menu">dashboard</mat-icon></a>
   <a href="tasks" class="menu-item">Return to Login<mat-icon class="icon-menu">login</mat-icon> </a>
 
@@ -41,17 +41,20 @@
   <button *ngIf="displayPlaceholder2==false" (click)="getTasks()" class="cancel">Cancel</button>
   </div>
 
+  <div class="filter">
   <button mat-button class="header-button" [mat-menu-trigger-for]="menu">modify</button>
+  <button mat-button *ngIf="displayPlaceholder3==false" (click)="getTasks()" class="cancel">cancel</button>
+  </div>
     <mat-menu style="background-color: black;" class="menu" #menu="matMenu" [hasBackdrop]="false">
     <input matinput type="number" placeholder="Enter Tasks's Id" (click)="$event.stopPropagation()" [(ngModel)]="updatedId" ><br>
     <mat-select id="updatedStatus" class="header-button" 
       [(ngModel)]="updatedStatus" placeholder="Select Status"
        (click)="$event.stopPropagation()"
       >
-        <mat-option value="COMPLETED">Completed</mat-option>
-        <mat-option value="PENDING">Pending</mat-option>
-        <mat-option value="IN_PROGRESS">In Progress</mat-option>
-        <mat-option value="OVERDUE">Overdue</mat-option>
+        <mat-option style="background:white"  value="COMPLETED">Completed</mat-option>
+        <mat-option style="background:white" value="PENDING">Pending</mat-option>
+        <mat-option style="background:white" value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option style="background:white" value="OVERDUE">Overdue</mat-option>
       </mat-select><br>
       <button class="cancel">cancel</button>
       <button style="margin-right: 0px;" class="header-button" (click)="updateTaskStatus()" >confirm</button>

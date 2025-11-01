@@ -1,1 +1,24 @@
-<p>dashboard-component works!</p>
+<div id="container">
+    <div id="title">
+      <h1 >Dashbaord</h1>
+      <a routerLink="/tasks" class="menu-item" >User's Taks List<mat-icon class="icon-menu">list</mat-icon></a>
+      <a routerLink="/admin" class="menu-item">Tasks Management<mat-icon class="icon-menu">manage</mat-icon></a>
+      <a href="dashboard" class="menu-item">Return to Login<mat-icon class="icon-menu">login</mat-icon> </a>
+
+      <div style="margin-top:510px ;">
+      <a style="text-decoration: underline;" href="">about us</a>
+      <a style="text-decoration: underline;" href="" >contact us</a></div>
+      <p>copyright &copy; 2025</p>
+    </div>
+    <div  class="main">
+        <div class="pie-container">
+        <div style="max-height: 800px;" class="piechart">
+           <canvas  baseChart
+             [data]="pieChartData"
+             [type]="'pie'">
+            </canvas>
+        </div>
+        <h2 class="h2">Total Tasks Numbers : {{totalTasks}}</h2>
+        </div>
+    </div>
+</div>
