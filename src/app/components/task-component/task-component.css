@@ -53,10 +53,11 @@
     display: flex;
     flex-direction: column;
     width: 28%;
+    min-width: 170px;
     max-width: 205px;
     align-items: center;
     /* justify-content: center; */
-    height: 100vh;
+    min-height: 100vh;
 }
 h1{
     font-size: 40px;
@@ -89,10 +90,11 @@ a{
   border-radius: 8px;
   border-color: #eee;
   cursor: pointer;
-  max-height: 27px;
+  max-height: 45px;
+  min-height: 40px;
   min-height: 27px;
   font-size: 15px;
-  margin-right: 3px;
+  margin-right: 2px;
   background-color: rgb(245, 240, 240);
   color: black;
 }
@@ -154,7 +156,10 @@ h3{
   margin-left: 50px;
 }
 
-
+#info{
+  position: fixed;
+  bottom: 16px;
+}
 
 
 

@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    min-height: 643px;
     max-height: 800px;
+    overflow-y: hidden;
+    background-color: black;
+    /* max-height: 633px; */
+    font-size: 14px;
 }
 
 .login-backround{
@@ -12,7 +17,7 @@
     justify-content: start;
     background-color: rgb(215, 233, 250);
     width: 100% ;
-
+    max-height: 640px;
 }
 .login-form{
     background-color: rgb(118, 163, 247);
@@ -25,30 +30,27 @@
     align-items: center;
     /* position: relative; */
     /* top: 17px; */
-    max-width: 500px;
+    max-width: 370px;
     margin-left: 40px;
     margin-top: 60px;
     color: white;
 }
 
 .title{
-    background-color: rgb(29, 29, 194);
     background-color:rgb(54, 69, 156);
     color: white;
-    margin: 0;
+    margin: 0px;
     display: flex;
     width: 28%;
-    max-height: 800px;
-    max-width: 200px;
-    /* padding-bottom: 750px; */
+    max-width: 150px;
     align-items: center;
     justify-content: center;
-    height: 800px;
+    min-height: 100%;
 }
 h1{
     position: relative;
     white-space: nowrap;
-    font-size: 60px;
+    font-size: 55px;
     writing-mode: vertical-rl;
     /* transform: scaleY(-1); */
     transform: rotate(180deg);
@@ -127,13 +129,16 @@ h2{
     color: yellow;
     text-decoration: underline;
     cursor: pointer;
+    white-space: nowrap;
 }
 p{
     color: black;
+    white-space: nowrap;
 }
 mat-icon{
     margin-right: 3px;
 }
 .icon-text{
-    margin:5px;
+    margin:6px;
+    font-size: 14px;
 }

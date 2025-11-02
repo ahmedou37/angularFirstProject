@@ -4,6 +4,7 @@
   height: 100%; 
   width: 100%;
   min-height: 800px;
+  background-color: blue;
 }
 
 .main{
@@ -55,17 +56,16 @@
     max-width: 205px;
     align-items: center;
     /* justify-content: center; */
-    height: 100vh;
+    min-height: 100vh;
 }
 h1{
     /* position: relative; */
     /* white-space: nowrap; */
-    font-size: 33px;
+    font-size: 30px;
     margin-bottom: 7px;
     display: flex;
     white-space: nowrap;
-    max-width: 90%;
-    margin-right: 15px;
+    max-width: 100%;
     /* writing-mode: vertical-rl; */
     /* transform: scaleY(-1); */
     /* transform: rotate(180deg); */
@@ -97,7 +97,7 @@ a{
   border-radius: 8px;
   border-color: #eee;
   cursor: pointer;
-  max-height: 27px;
+  max-height: 40px;
   min-height: 27px;
   font-size: 15px;
   margin-right: 3px;
@@ -167,7 +167,7 @@ h3{
 
 
 #create{
-  font-size: 14px;
+  font-size: 13px;
 }
 #createStatus{
   width: 90%;
@@ -188,6 +188,12 @@ h3{
   z-index: 10;
   pointer-events: auto;
 }
+
+#info{
+  position: fixed;
+  bottom: 16px;
+}
+
 
 ::ng-deep .snackbar{
   background-color: rgb(247, 247, 247);

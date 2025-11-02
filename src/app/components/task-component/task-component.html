@@ -5,10 +5,10 @@
   <a routerLink="/dashboard" class="menu-item">Tasks's Dashboard<mat-icon class="icon-menu">dashboard</mat-icon></a>
   <a href="tasks" class="menu-item">Return to Login<mat-icon class="icon-menu">login</mat-icon> </a>
 
-  <div style="margin-top:510px ;">
+  <div id="info">
   <a style="text-decoration: underline;" href="">about us</a>
-  <a style="text-decoration: underline;" href="" >contact us</a></div>
-  <p>copyright &copy; 2025</p>
+  <a style="text-decoration: underline;" href="" >contact us</a>
+  <p style="margin-left: 20px;">copyright &copy; 2025</p></div>
 </div>
 
 <div class="main">
@@ -56,8 +56,9 @@
         <mat-option style="background:white" value="IN_PROGRESS">In Progress</mat-option>
         <mat-option style="background:white" value="OVERDUE">Overdue</mat-option>
       </mat-select><br>
-      <button class="cancel">cancel</button>
-      <button style="margin-right: 0px;" class="header-button" (click)="updateTaskStatus()" >confirm</button>
+      <div style="display: flex;flex-direction:row">
+      <button style="margin-right: 3px;" class="header-button">cancel</button>
+      <button style="margin-right: 0px;" class="header-button" (click)="updateTaskStatus()" >confirm</button></div>
     </mat-menu>
 </div>
 
