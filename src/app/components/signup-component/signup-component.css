@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     width: 70%;
-    height: 70%;
+    height: 60%;
     margin: 0 auto;
     border-radius: 35px;
     align-items: center;
@@ -58,8 +58,9 @@ h1{
 
 
 h2{
-    margin:  40px;
-    font-size: 35px;
+    margin-top:  40px;
+    margin-bottom: 20px;
+    font-size: 40px;
     color: white;
 }
 
@@ -69,7 +70,7 @@ h2{
     border-color: aliceblue;
     display: flex;
     width: 63%;
-    height: 7%;
+    height: 9%;
     margin-top: 10px;
     /* margin-bottom: 10px; */
     font-size: 20px;
@@ -83,6 +84,9 @@ h2{
 #username-note{
     padding-right: 130px;
 }
+#username-existe-note{
+    padding-right: 110px;
+}
 
 #login-button{
     margin :10px;
@@ -90,33 +94,18 @@ h2{
     background-color:rgb(64, 84, 202);
     color: white;
     width:70% ;
-    height: 10%;
+    height: 12%;
     border-radius: 15px;
     font-size: 25px;
     cursor: pointer;
 }
 
-
-.icon-container{
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    height: 7%;
-}
-
-.icon{
-    background-color: rgb(213, 227, 241);
-    border-radius: 7px;
-    margin-top: 10px;
-    color: blue;
-    width: 40%;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
+.login-container{
+    min-height: 59%;
 }
 
 .text-container{
-    margin: 30px;
+    margin: 10px;
     display: flex;
     flex-direction: row;
     width: 45%;
@@ -141,4 +130,29 @@ mat-icon{
 .icon-text{
     margin:6px;
     font-size: 14px;
+}
+#login{
+    white-space: nowrap;
+    margin-top: 13px;
+    color: yellow;
+}
+
+::ng-deep .snackbar{
+  background-color: rgb(247, 247, 247);
+  color: rgb(0, 0, 0);
+  border-radius:6px ;
+  margin-bottom: 30px;
+}
+
+::ng-deep  .mdc-snackbar__action {
+  --mdc-text-button-hover-state-layer-color: transparent !important;
+}
+
+::ng-deep .mdc-snackbar__action:hover {
+  background-color: white !important;
+  color: #b8b1b1 !important;
+}
+
+::ng-deep  .mdc-snackbar__action:hover .mdc-button__label {
+  color: #080808 !important;
 }

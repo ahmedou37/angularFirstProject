@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="title">
+    <h1 > Welcom - Sign Up Page </h1>
+    </div>
+    <div class="login-backround">
+    <div class="login-form">
+    <h2>Sign Up Now</h2>
+    <input class="login-input" [(ngModel)]="addedUser.name" name="name" placeholder="Enter Username" required />
+    <p class="note" id="username-note" *ngIf="nameNote!==blank">{{nameNote}}</p>
+    <p class="note" id="username-existe-note" *ngIf="nameExistNote!==blank">{{nameExistNote}}</p>
+    <input class="login-input" [(ngModel)]="addedUser.password" name="password" type="password" placeholder="Enter Password" required />
+    <p class="note" *ngIf="passwordNote!==blank" >{{passwordNote}}</p>
+    <button id="login-button" color="primary" (click)="createUser()" class="login">Sign Up</button>
+    <div class="text-container">
+        <p >Already a member? </p>
+        <a id="login" href="tasks" >Login Now</a>
+    </div>
+   </div>
+   </div>
+</div>

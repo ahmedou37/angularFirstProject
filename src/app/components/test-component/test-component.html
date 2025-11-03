@@ -2,9 +2,13 @@
   <div *ngFor="let msg of messages" class="message">
     {{ msg }}
   </div>
-
   <div class="input-area">
     <input [(ngModel)]="newMessage" placeholder="Type message..." />
     <button (click)="send()">Send</button>
   </div>
 </div>
+
+<input type="file" (change)="image" accept="image/*">
+<button (click)="addImage()">Add Image</button>
+
+<img src="http://localhost:8080/images/image1.png" style="max-height:100px; margin-top:200px"  >
