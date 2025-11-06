@@ -8,7 +8,32 @@
   </div>
 </div>
 
-<input type="file" (change)="image" accept="image/*">
+<input type="file" (change)="onImageSelected($event)" accept="image/*">
 <button (click)="addImage()">Add Image</button>
 
 <img src="http://localhost:8080/images/image1.png" style="max-height:100px; margin-top:200px"  >
+
+
+
+<label for="file-input" class="custom-file-button">
+  Choose File
+</label>
+<input type="file" id="file-input" style="display: none;">
+
+<!-- <script>
+document.getElementById('file-input').addEventListener('change', function(e) {
+  const fileName = e.target.files[0]?.name || 'No file chosen';
+  document.querySelector('.custom-file-button').textContent = fileName;
+});
+</script> -->
+
+<style>
+.custom-file-button {
+  background: #7a848f;
+  color: white;
+  padding: 10px 50px;
+  border-radius: 15px;
+  cursor: pointer;
+  display: inline-block;
+}
+</style>

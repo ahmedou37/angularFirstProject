@@ -15,6 +15,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../services/socket-service/socket-service';
 import { RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -54,7 +55,6 @@ export class TaskComponent {
     this.service.getTasks().subscribe(data=>{
       this.tasks=data;
       this.dataSource.data = this.tasks;
-      
       if (this.sort1) {
         this.dataSource.sort = this.sort1;
       }
@@ -95,18 +95,26 @@ export class TaskComponent {
       this.dataSource1.paginator = this.paginator2;
     });
   }
-
+  taskIds:number[]=[]
   updateTaskStatus(){
+    for(const t of this.tasks){
+      if (t.id){this.taskIds.push(t.id)}
+    }
+    if(this.updatedId&&this.taskIds.includes(this.updatedId)){
     this.service.updateTaskStatus(this.updatedId,this.updatedStatus).subscribe(data=>{
       this.updatedTask=data;
       this.displayPlaceholder3=false
-    });
-    this.isTableVisible4 =true;
-    this.isTableVisible1=false;
+      this.isTableVisible4 =true;
+     this.isTableVisible1=false;
     this.isTableVisible2=false;
-    this.isTableVisible3=false;
-    this.updatedStatus=null;  
+    this.isTableVisible3=false;  
+    });
+    }
+    else{
+      this.errorSnackbar()
+    }
     this.updatedId=null
+    this.updatedStatus=null;
   }
 
 
@@ -122,7 +130,7 @@ export class TaskComponent {
   dataSource: MatTableDataSource<Task> ;
   dataSource1: MatTableDataSource<Task> ;
 
-  constructor(private websocketService: WebsocketService) {
+  constructor(private websocketService: WebsocketService ,private  snackbar:MatSnackBar) {
     this.getTasks()
     this.dataSource = new MatTableDataSource(this.tasks);
     this.dataSource1 = new MatTableDataSource(this.filteredTasks);
@@ -208,5 +216,13 @@ export class TaskComponent {
     displayPlaceholder1:boolean=true
     displayPlaceholder2:boolean=true
     displayPlaceholder3:boolean=true
+
+
+    errorSnackbar(){
+      this.snackbar.open("no task found with that id ","close",{
+        duration:3000,
+        panelClass:"snackbar"
+      })
+    }
    
 }

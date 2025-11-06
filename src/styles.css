@@ -4,3 +4,25 @@ body {
   overflow-y: auto;
 }
 
+#createStatus .mat-mdc-select-placeholder {
+  position: relative;
+  left: 19px;
+  right:0px;
+  font-size: 16px;
+}
+#createStatus .mat-mdc-select-value-text {
+  position: relative;
+  left: 19px;
+  right:0px;
+}
+#updatedStatus .mat-mdc-select-placeholder {
+  position: relative;
+  left: 19px;
+  right:0px;
+  font-size: 16px;
+}
+#updatedStatus .mat-mdc-select-value-text {
+  position: relative;
+  left: 19px;
+  right:0px;
+}

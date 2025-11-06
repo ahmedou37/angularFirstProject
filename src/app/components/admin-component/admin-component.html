@@ -1,13 +1,13 @@
 <div class="container">
 <div id="title">
   <h1 >Manage Tasks</h1>
-  <a routerLink="/tasks" class="menu-item" >User's Taks List<mat-icon class="icon-menu">list</mat-icon></a>
-  <a routerLink="/dashboard" class="menu-item">Tasks's Dashboard<mat-icon class="icon-menu">dashboard</mat-icon></a>
-  <a href="admin" class="menu-item">Return to Login<mat-icon class="icon-menu">login</mat-icon> </a>
+  <a routerLink="/tasks" class="menu-item" style="font-size: 18px;margin-right:15px" ><mat-icon class="icon-menu">list</mat-icon>User's Taks List</a>
+  <a routerLink="/dashboard" class="menu-item"><mat-icon class="icon-menu">dashboard</mat-icon>Tasks's Dashboard</a>
+  <a href="admin" class="menu-item" id="login-menu"><mat-icon class="icon-menu" id="login-icon">login</mat-icon><p style="font-size: 16px;display:inline">Return to Login Page</p></a>
 
   <div id="info">
-  <a style="text-decoration: underline;" href="">about us</a>
-  <a style="text-decoration: underline;" href="" >contact us</a>
+  <a style="text-decoration: underline;cursor:pointer;" >about us</a>
+  <a style="text-decoration: underline;cursor:pointer;"  >contact us</a>
   <p style="margin-left: 20px;">copyright &copy; 2025</p></div>
 </div>
 
@@ -43,17 +43,17 @@
 
 
   <button id="create" mat-button class="header-button" [mat-menu-trigger-for]="createMenu">Create Task</button>
-    <mat-menu class="menu" #createMenu="matMenu" [hasBackdrop]="false">
+    <mat-menu style="overflow-x: hidden;" class="menu" #createMenu="matMenu" [hasBackdrop]="false">
     <input matinput type="text" placeholder="Enter Task's Title" (click)="$event.stopPropagation()" [(ngModel)]="addedTask!.title" ><br>
     <input matinput type="text" placeholder="Enter Task's Description" (click)="$event.stopPropagation()" [(ngModel)]="addedTask!.description" ><br>
-    <mat-select id="createStatus" class="header-button" 
+     <mat-select id="createStatus" class="header-button"
       [(ngModel)]="addedTask!.status" placeholder="Select Status"
        (click)="$event.stopPropagation()"
       >
-        <mat-option value="COMPLETED">Completed</mat-option>
-        <mat-option value="PENDING">Pending</mat-option>
-        <mat-option value="IN_PROGRESS">In Progress</mat-option>
-        <mat-option value="OVERDUE">Overdue</mat-option>
+        <mat-option style="background:white" value="COMPLETED">Completed</mat-option>
+        <mat-option style="background:white" value="PENDING">Pending</mat-option>
+        <mat-option style="background:white" value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option style="background:white" value="OVERDUE">Overdue</mat-option>
       </mat-select><br>
       <div style="display: flex;flex-direction:row">
       <button style="margin-right: 3px;" class="header-button">cancel</button>

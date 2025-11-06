@@ -53,6 +53,15 @@ export class TestComponent implements OnInit, OnDestroy {
       
     });
   }
+
+  onImageSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (file) {
+    this.image = file;
+    this.imageName = file.name;
+    console.log('Image selected:', this.imageName);
+  }
+}
 }
 
 

@@ -16,6 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
 import { JwtUser } from '../login-component/login-component';
 import { jwtDecode } from 'jwt-decode';
+import { User } from '../../model/User';
+import { UserService } from '../../services/user-service/user-service';
 
 
 @Component({
@@ -32,7 +34,7 @@ export class AdminComponent {
   taskService=inject(TaskService)
 
   tasks:Task[]=[];
-  searchId?:number;
+  searchId?:number|null;
   task?:Task = {
     title: '',
     description:'',
@@ -43,12 +45,17 @@ export class AdminComponent {
     description:'',
     status:''   
   }
-  deletedId?:number
-  userId?:number
-  taskId?:number
+  deletedId?:number|null
+  userId?:number|null
+  taskId?:number|null
   status?:string|null
   filteredTasks:Task[]=[]
   minDate=new Date()
+  taskIds:number[]=[]
+
+  users:User[]=[]
+  userIds:number[]=[]
+  userService=inject(UserService)
 
   
   getTasks(){
@@ -60,6 +67,11 @@ export class AdminComponent {
         this.dataSource.sort = this.sort1;
       }
       this.dataSource.paginator = this.paginator1;
+
+      this.taskIds=[]
+      for(const t of this.tasks){
+      if (t.id){this.taskIds.push(t.id)}
+    }
     });
     this.isTableVisible1 =true;
     this.isTableVisible2 = false;
@@ -97,27 +109,53 @@ export class AdminComponent {
     this.isTableVisible4=false;
     this.displayPlaceholder2=false
   }
-  assigneTaskToUser() {
+
+  assigneTaskToUser() { 
     if (this.user.roles&&(this.user.roles[0]!="ROLE_ADMIN")) {
-      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);     
-    }
+      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);  
+      this.userId=null
+      this.taskId=null   
+    }else if(this.userId&&!this.userIds.includes(this.userId)){
+      this.snackBar.open("no user found with that id","close",{panelClass:['snackbar'],duration:2000},);
+      this.userId=null
+      this.taskId=null
+    }else if(this.taskId&&!this.taskIds.includes(this.taskId)){
+      this.snackBar.open("no task found with that id","close",{panelClass:['snackbar'],duration:2000},);
+      this.userId=null
+      this.taskId=null
+    }else{
     this.service.assignTaskToUser(this.userId, this.taskId).subscribe(data => {
       this.assignedSnackbar(this.userId,this.taskId)
-      //this.taskService.incrementNotLength()
-     // this.taskService.getNotLenght()
+      this.userId=null
+      this.taskId=null
      });
+    }
   }
   addTask(){
     if (this.user.roles&&(this.user.roles[0]!="ROLE_ADMIN")) {
-      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);     
+      this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);
+      if(this.addedTask?.title){this.addedTask.title=''}
+      if(this.addedTask?.description){this.addedTask.description=''}
+      if(this.addedTask?.status){this.addedTask.status=''}     
     }
-    this.service.addTask(this.addedTask).subscribe(data=>{this.addSnackbar(this.addedTask?.title)})
+    
+    this.service.addTask(this.addedTask).subscribe(data=>{
+      this.addSnackbar(this.addedTask?.title)
+      if(this.addedTask?.title){this.addedTask.title=''}
+      if(this.addedTask?.description){this.addedTask.description=''}
+      if(this.addedTask?.status){this.addedTask.status=''}
+    })
   }
   deleteTask() {
     if (this.user.roles&&(this.user.roles[0]!="ROLE_ADMIN")) {
       this.snackBar.open("You Don't Have The Permission To Modify Tasks ","close",{panelClass:['snackbar'],duration:2000},);     
+      this.deletedId=null
+    }else if(this.deletedId&&!this.taskIds.includes(this.deletedId)){
+      this.snackBar.open("no task found with that id","close",{panelClass:['snackbar'],duration:2000},);
+      this.deletedId=null
+    }else{
+    this.service.deleteTask(this.deletedId).subscribe(data => {this.removeSnackbar(this.deletedId),this.deletedId=null});
     }
-    this.service.deleteTask(this.deletedId).subscribe(data => {this.removeSnackbar(this.deletedId)});
   }
   
 
@@ -137,8 +175,15 @@ export class AdminComponent {
 
   constructor(private snackBar:MatSnackBar) {
     this.getTasks()
+    this.userIds=[]
+    this.userService.getUsers().subscribe(data=>{
+      this.users=data;
+      for(const u of this.users){
+        if(u.id){this.userIds.push(u.id)}
+      }})
     this.dataSource = new MatTableDataSource(this.tasks);
     this.dataSource1 = new MatTableDataSource(this.filteredTasks);
+  
   }
   
   ngAfterViewInit() {

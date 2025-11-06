@@ -18,6 +18,8 @@ export class UserService {
   }
 
   addImage(image: File): Observable<string> {
+    console.log("method called")
+    console.log("imageName"+image.name)
     const formData = new FormData();
     formData.append('image', image); // 'image' must match @RequestParam("image")
   

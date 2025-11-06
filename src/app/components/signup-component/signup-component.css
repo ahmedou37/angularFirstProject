@@ -4,27 +4,26 @@
     width: 100%;
     min-height: 643px;
     max-height: 800px;
-    overflow-y: hidden;
+    overflow: hidden;
     background-color: black;
     /* max-height: 633px; */
     font-size: 14px;
 }
 
 .login-backround{
-    /* background-image: url("https://wallpaperaccess.com/full/5313605.jpg");
-    background-size: cover;       */
+    background-image: url('../../../assets/images/image.png'); 
+    background-size: 100% 100%;
     display: flex;
     justify-content: start;
     background-color: rgb(215, 233, 250);
     width: 100% ;
-    max-height: 640px;
 }
 .login-form{
     background-color: rgb(118, 163, 247);
     display: flex;
     flex-direction: column;
     width: 70%;
-    height: 60%;
+    height: 65%;
     margin: 0 auto;
     border-radius: 35px;
     align-items: center;
@@ -34,6 +33,7 @@
     margin-left: 40px;
     margin-top: 60px;
     color: white;
+    overflow: hidden;
 }
 
 .title{
@@ -79,14 +79,55 @@ h2{
 .note{
     margin: 0px;
     color: rgb(228, 11, 11);
-    margin-left: 10px;
+    margin-left: 8px;
 }
 #username-note{
     padding-right: 130px;
 }
 #username-existe-note{
-    padding-right: 110px;
+    padding-right: 130px;
 }
+#email-input{
+    font-size: 16px;
+}
+#email-input::placeholder{
+    font-size: 20px;
+}
+#email-note{
+    padding-right: 160px;
+    display: block;
+}
+
+#image-container{
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+}
+#image-label{
+    background-color: white;
+    color: black;
+    margin-top: 11px;
+    margin-right: 10px;
+    margin-left: 3px;
+    font-size: 18px;
+    border-radius: 6px;
+    width: 50%;
+    height: 55%;
+    max-width: 110px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#image-label:hover{
+    background-color:#c9c6c6
+}
+img{
+    margin-top: 5px;
+    max-width: 100px;
+    max-height: 100px;
+}
+
 
 #login-button{
     margin :10px;
@@ -110,6 +151,7 @@ h2{
     flex-direction: row;
     width: 45%;
     height: 7%;
+    margin-bottom: 30px;
 }
 #signup{
     position: relative;
@@ -136,6 +178,8 @@ mat-icon{
     margin-top: 13px;
     color: yellow;
 }
+
+
 
 ::ng-deep .snackbar{
   background-color: rgb(247, 247, 247);

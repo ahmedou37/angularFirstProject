@@ -7,7 +7,7 @@ import { FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-signup-component',
-  imports: [CommonModule,FormsModule ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './signup-component.html',
   styleUrl: './signup-component.css'
 })
@@ -17,20 +17,31 @@ export class SignupComponent {
 
   addedUser:User={
     name:'',
-    password:''
+    password:'',
+    email:''
   }
 
   createUser(){
     this.checkNote()
     this.checkUserName(this.addedUser.name)
-    if(this.checkNote()===true&&this.checkUserName(this.addedUser.name)===true){
-      this.userService.createUser(this.addedUser).subscribe(u=>this.signupSnackbar())
+    this.checkEmail()
+    console.log("emailLenght:"+this.addedUser.email.length)
+    this.addImage()
+    console.log(this.emailNote)
+    if(this.checkNote()===true&&this.checkUserName(this.addedUser.name)===true&&this.checkEmail()===true&&this.addImage()==true){
+      this.userService.createUser(this.addedUser).subscribe(u=>{
+        this.signupSnackbar()
+        this.addedUser.name=''
+        this.addedUser.password=''
+        this.addedUser.email=''
+        this.imageUrl=null})
     }
   }
 
   users?:User[]
   nameNote=''
   passwordNote=''
+  emailNote=''
   blank=''
   nameExistNote=''
   checkNote():boolean{
@@ -49,7 +60,7 @@ export class SignupComponent {
       this.passwordNote='*password should contains minimum 4 letters'
       return false
     }
-     return true
+    return true
   }
   checkUserName(name:string):boolean{
     this.nameExistNote=''
@@ -61,6 +72,20 @@ export class SignupComponent {
     } 
   return true
   }
+  checkEmail():boolean{
+    this.emailNote=''
+    if(this.addedUser.email.length==0){
+      this.emailNote="*email requiered"
+      console.log(this.emailNote)
+      return false
+    }
+    if(!(this.addedUser.email.includes('@')&&this.addedUser.email.includes('.'))){
+      this.emailNote='*email is invalid'
+      return false
+    }
+    return true
+  }
+
   constructor(){
     this.checkUserName(this.addedUser.name)
   }
@@ -70,4 +95,47 @@ export class SignupComponent {
       panelClass:'snackbar'
     })
   }
+
+
+  image?:File|null
+  imageUrl: string | null = null; 
+  imageNote:string=''
+
+
+  addImage():boolean {
+    this.imageNote=''
+    if (!this.image) {
+      this.imageNote='*image requiered'
+      return false;
+    }
+    this.userService.addImage(this.image).subscribe({
+      next: (data) => {
+        this.addedUser.imageName=data,
+        console.log("Image added successfully:",this.addedUser.imageName);
+        return true
+      },
+      
+    });
+    return true;
+  }
+
+
+  onImageSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (file) {
+    this.image = file;
+    this.addedUser.imageName=file.name
+    console.log('Image selected:', this.addedUser.imageName);
+
+
+    //create url for the image
+    if (this.imageUrl) {
+      URL.revokeObjectURL(this.imageUrl); //clean up previous url
+    }
+    this.imageUrl = URL.createObjectURL(file);
+    } else {
+    this.imageUrl = null; 
+  }
+  }
+
 }

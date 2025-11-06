@@ -60,7 +60,7 @@
     min-height: 100vh;
 }
 h1{
-    font-size: 40px;
+    font-size: 33px;
     margin-bottom: 7px;
 }
 a{
@@ -70,15 +70,18 @@ a{
   font-size: 18px;
 }
 .icon-menu{
-  margin-left: 0px;
+  margin:0px;
   padding: 0px;
   margin-top: 5px;
   position: relative;
   top: 7px;
+  margin-right: 3px;
 }
+
 .menu-item{
   margin-left: 0px;
   font-size: 17px;
+  white-space: nowrap;
 }
 
 .filter{
@@ -105,7 +108,7 @@ a{
   min-width: 100px;
   width: 87%;
   margin-bottom: 10px;
-  margin-left: 7px;
+  margin-left: 2px;
   margin-right: 0px;
 }
 
@@ -236,9 +239,32 @@ Material components like datepicker are rendered outside your component in the g
   right: 16px;
   background-color: rgb(240, 240, 245) ;
   border-color: rgb(240, 240, 245);
+  cursor: pointer;
 }
 
 ::ng-deep .menu{
   max-width: 200px!important;
   margin: 0px!important;
+}
+
+
+
+::ng-deep .snackbar{
+  background-color: rgb(247, 247, 247);
+  color: rgb(0, 0, 0);
+  border-radius:6px ;
+  margin-bottom: 30px;
+}
+
+::ng-deep  .mdc-snackbar__action {
+  --mdc-text-button-hover-state-layer-color: transparent !important;
+}
+
+::ng-deep .mdc-snackbar__action:hover {
+  background-color: white !important;
+  color: #b8b1b1 !important;
+}
+
+::ng-deep  .mdc-snackbar__action:hover .mdc-button__label {
+  color: #080808 !important;
 }
