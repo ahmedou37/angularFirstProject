@@ -133,8 +133,9 @@ export class SignupComponent {
       URL.revokeObjectURL(this.imageUrl); //clean up previous url
     }
     this.imageUrl = URL.createObjectURL(file);
+    console.log("imageUrl:"+this.imageUrl)
     } else {
-    this.imageUrl = null; 
+    this.imageUrl = ''; 
   }
   }
 
