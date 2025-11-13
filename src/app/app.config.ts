@@ -2,7 +2,7 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChang
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpRequest, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptorFn } from './services/interceptor/auth-interceptor';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptorFn])), provideCharts(withDefaultRegisterables()),
-  provideNativeDateAdapter()
+    provideNativeDateAdapter()
    ]
 };
 

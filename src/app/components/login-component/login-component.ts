@@ -17,7 +17,8 @@ export interface JwtUser {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule,MatButtonModule,MatInputModule,MatIconModule],
+  imports: [FormsModule, CommonModule, HttpClientModule,MatButtonModule,
+    MatInputModule,MatIconModule],
   templateUrl: `login-component.html`,
   styleUrl:`login-component.css`
 })
@@ -71,6 +72,28 @@ export class LoginComponent {
       this.passwordNote='*password should contains minimum 4 letters'
     }
   }
+
+  onSubmit(event: Event) {
+  event.preventDefault();
+  const form = event.target as HTMLFormElement;
+  const passwordInput = document.getElementById('password') as HTMLInputElement;
+
+  if (passwordInput.value.length < 6) {
+    passwordInput.setCustomValidity('Password must be at least 4 characters');
+  } else {
+    passwordInput.setCustomValidity('');
+  }
+
+  if (!form.checkValidity()) {
+    event.preventDefault();
+  }
+  
+  form.classList.add('was-validated');
+}
+passsword:string=''
+
+showButton: boolean = false;
+
 }
 
 // ActivatedRoute is Angular's way of giving you information about the current route/URL. It's like a "URL reader" that can tell you:

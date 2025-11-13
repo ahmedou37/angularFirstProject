@@ -1,3 +1,4 @@
+<p-button>od</p-button>
 <div class="container">
     <div class="title">
     <h1 > Welcom - Login Page </h1>
@@ -5,11 +6,23 @@
     <div class="login-backround">
     <div class="login-form">
     <h2>Login Now</h2>
-    <input class="login-input" [(ngModel)]="name" name="name" placeholder="Enter Username" required />
-    <p class="note" id="username-note" *ngIf="nameNote!==blank">{{nameNote}}</p>
-    <input class="login-input" [(ngModel)]="password" name="password" type="password" placeholder="Enter Password" required />
-    <p class="note" *ngIf="passwordNote!==blank" >{{passwordNote}}</p>
-    <button id="login-button" color="primary" (click)="login()" class="login">LOGIN</button>
+    <div class="container">
+    <form class="form-floating form" (submit)="onSubmit($event)">
+    <div class="form-floating my-3">
+    <input type="email" id="email" class="form-control" placeholder="enter" required>
+    <label for="email" class="form-label">Email</label>
+    <div class="invalid-feedback">Invalid email address</div>
+   </div>
+   <div class="form-floating mt-3">
+    <input type="password" id="password" class="form-control" placeholder="enter" [(ngModel)]="passsword" name="passsword" required>
+    <label for="password" class="form-label">Password</label>
+    <div *ngIf="passsword.length>0" class="invalid-feedback">password should contains minimun 4 letters </div>
+    <div *ngIf="passsword.length==0" class="invalid-feedback">Invalid password</div>
+  </div>
+  <button id="login-button" class="btn btn-outline-primary mt-2">Login</button>
+  </form>
+</div>
+
     <p>Or Login With </p>
     <div class="icon-container">
         <div class="icon"><mat-icon >facebook</mat-icon><a class="icon-text">Facebook</a></div>
@@ -22,3 +35,46 @@
    </div>
    </div>
 </div>
+
+<!-- <div class="container">
+    <form class="form-floating form" (submit)="onSubmit($event)">
+    <div class="form-floating my-3">
+    <input type="email" id="email" class="form-control" placeholder="enter" required>
+    <label for="email" class="form-label">Email</label>
+    <div class="invalid-feedback">Invalid email address</div>
+   </div>
+   <div class="form-floating mt-3">
+    <input type="password" id="password" class="form-control" placeholder="enter" [(ngModel)]="passsword" name="passsword" required>
+    <label for="password" class="form-label">Password</label>
+    <div *ngIf="passsword.length>0" class="invalid-feedback">password should contains minimun 4 letters </div>
+    <div *ngIf="passsword.length==0" class="invalid-feedback">Invalid password</div>
+  </div>
+  <button type="submit" class="btn btn-outline-primary mt-2">Submit</button>
+  </form>
+</div>
+
+ -->
+
+
+
+<div class="container mt-4">
+  <!-- Switch to control button visibility -->
+  <div class="form-check form-switch mb-3">
+    <input class="form-check-input" type="checkbox" id="toggleSwitch" 
+           [(ngModel)]="showButton" name="toggleSwitch">
+    <label class="form-check-label" for="toggleSwitch">
+      {{ showButton ? 'Hide Button' : 'Show Button' }}
+    </label>
+  </div>
+
+  <!-- Button that appears/disappears based on switch -->
+  <button *ngIf="showButton" class="btn btn-primary">
+    I appear when switch is ON!
+  </button>
+</div>
+
+
+
+
+
+

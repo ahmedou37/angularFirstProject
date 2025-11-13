@@ -1,4 +1,4 @@
-.container{
+/* .container{
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -6,12 +6,11 @@
     max-height: 800px;
     overflow-y: hidden;
     background-color: black;
-    /* max-height: 633px; */
     font-size: 14px;
-}
+} */
 
 .login-backround{    
-    background-image: url('../../../assets/images/image.png'); 
+    /* background-image: url('../../../assets/images/image.png');  */
     background-size: 100% 100%;
     display: flex;
     justify-content: start;
@@ -141,4 +140,10 @@ mat-icon{
 .icon-text{
     margin:6px;
     font-size: 14px;
+}
+
+
+.form{
+    margin-top: 20px;
+    max-width: 50%;
 }

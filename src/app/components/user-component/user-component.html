@@ -1,0 +1,131 @@
+<div class="container">
+    <div id="title">
+    <h1 >Manage Users</h1>
+    <div id="menu">
+    <a routerLink="/tasks" class="menu-item" style="font-size: 18px;margin-right:15px" ><mat-icon class="icon-menu">list</mat-icon>User's Taks List</a>
+    <a routerLink="/admin" class="menu-item"><mat-icon class="icon-menu">manage</mat-icon>Task Management</a>
+    <a routerLink="/dashboard" class="menu-item"><mat-icon class="icon-menu">dashboard</mat-icon>Tasks's Dashboard</a>
+    <a href="users" class="menu-item" id="login-menu"><mat-icon class="icon-menu" id="login-icon">login</mat-icon><p style="font-size: 16px;display:inline">Return to Login Page</p></a>
+    </div>
+
+    <div id="info">
+    <a style="text-decoration: underline;cursor:pointer;" >about us</a>
+    <a style="text-decoration: underline;cursor:pointer;"  >contact us</a>
+    <p style="margin-left: 20px;font-size:17px">copyright &copy; 2025</p>
+    </div>
+    </div>
+    <div class="main-container">
+    @if (displayUsers) {
+    @for (user of users; track user.id) {
+    <div class="card-container">
+        <div class="head-container">
+            <img [src]="this.getImageUrl(user.imageName!)" >
+            <div>
+               <p>Id: {{user.id}}</p>
+               <p>Name: {{user.name}}</p>
+               <p>Role: {{user.role}}</p>
+            </div>
+        </div>
+        <p id="email">email: {{user.email}}</p>
+
+        <div *ngIf="buttonDisplay" class="modify-button">
+        <button id="edite-menu" [mat-menu-trigger-for]="editeMenu" id="edite-button"><mat-icon>edite</mat-icon></button>
+        <mat-menu class="edite-menu" #editeMenu="matMenu" [hasBackdrop]="false">
+            
+            <input class="login-input" [(ngModel)]="user.name" placeholder="Enter Username" (click)="$event.stopPropagation()" required />
+            <input class="login-input" [(ngModel)]="user.role" placeholder="Enter User's Role" (click)="$event.stopPropagation()" required />
+            <input id="email-input" class="login-input" [(ngModel)]="user.email" type="text" placeholder="Enter Email" (click)="$event.stopPropagation()" required />
+            <div id="image-container">
+            <input id="image-input" type="file" (change)="onImageSelected($event,user)" style="display: none;" (click)="$event.stopPropagation()" accept="image/*" />    
+            @if (user.imageName&&user.imageName!='') {
+                <label for="image-input" id="image-label" (click)="$event.stopPropagation()">Change image</label>      
+                <p id="image-text" (click)="$event.stopPropagation()">{{user.imageName}}</p>
+            } @else {
+                <label for="image-input" id="image-label" (click)="$event.stopPropagation()">Choose image</label>
+                <p id="image-text" (click)="$event.stopPropagation()">no image chosen</p>
+            }
+    </div>
+            <button id="edite-mat-button" class="header-button">cancel</button>
+            <button id="edite-mat-button" class="header-button" (click)="updateUser(user)">confirm</button>
+        </mat-menu>
+
+
+        <button [mat-menu-trigger-for]="deleteMenu" id="delete-button"><mat-icon>delete</mat-icon></button>
+        <mat-menu class="delete-menu" #deleteMenu="matMenu" [hasBackdrop]="false">
+            <h4 >Delete User?</h4>
+            <button id="delete-mat-button" class="header-button">cancel</button>
+            <button id="delete-mat-button" class="header-button" (click)="deleteUser(searchedUser.id!)">confirm</button>
+        </mat-menu>
+        </div>
+    </div>
+    }}
+
+
+
+    @else {
+        <div class="card-container">
+        <div class="head-container">
+            <img [src]="this.getImageUrl(searchedUser.imageName!)" >
+            <div>
+               <p>Id: {{searchedUser.id}}</p>
+               <p>Name: {{searchedUser.name}}</p>
+               <p>Role: {{searchedUser.role}}</p>
+            </div>
+        </div>
+        <p id="email">email: {{searchedUser.email}}</p>
+
+        <div *ngIf="buttonDisplay" class="modify-button">
+        <button id="edite-menu" [mat-menu-trigger-for]="editeMenu" id="edite-button"><mat-icon>edite</mat-icon></button>
+        <mat-menu class="edite-menu" #editeMenu="matMenu" [hasBackdrop]="false">
+            
+            <input class="login-input" [(ngModel)]="searchedUser.name" placeholder="Enter Username" (click)="$event.stopPropagation()" required />
+            <input class="login-input" [(ngModel)]="searchedUser.role" placeholder="Enter User's Role" (click)="$event.stopPropagation()" required />
+            <input id="email-input" class="login-input" [(ngModel)]="searchedUser.email" type="text" placeholder="Enter Email" (click)="$event.stopPropagation()" required />
+            <div id="image-container">
+            <input id="image-input" type="file" (change)="onImageSelected($event,searchedUser)" style="display: none;" (click)="$event.stopPropagation()" accept="image/*" />    
+            @if (searchedUser.imageName&&searchedUser.imageName!='') {
+                <label for="image-input" id="image-label" (click)="$event.stopPropagation()">Change image</label>      
+                <p id="image-text" (click)="$event.stopPropagation()">{{searchedUser.imageName}}</p>
+            } @else {
+                <label for="image-input" id="image-label" (click)="$event.stopPropagation()">Choose image</label>
+                <p id="image-text" (click)="$event.stopPropagation()">no image chosen</p>
+            }
+    </div>
+            <button id="edite-mat-button" class="header-button">cancel</button>
+            <button id="edite-mat-button" class="header-button" (click)="updateUser(searchedUser)">confirm</button>
+        </mat-menu>
+
+
+        <button [mat-menu-trigger-for]="deleteMenu" id="delete-button"><mat-icon>delete</mat-icon></button>
+        <mat-menu class="delete-menu" #deleteMenu="matMenu" [hasBackdrop]="false">
+            <h4 >Delete User?</h4>
+            <button id="delete-mat-button" class="header-button">cancel</button>
+            <button id="delete-mat-button" class="header-button" (click)="deleteUser(searchedUser.id!)">confirm</button>
+        </mat-menu>
+        </div>
+    </div>
+      
+    }
+
+
+
+    <div id="select-button">
+    <mat-select
+  class="header-button"
+  [(ngModel)]="searchedId"
+  placeholder="Select Id"
+  (selectionChange)="idChange($event.value)">
+    @for (i of numbers; track $index) {
+      <mat-option [value]="i">{{ i }}</mat-option>
+    }
+  </mat-select>
+  <button *ngIf="displayUser==true" class="header-button" (click)="getUsers()">cancel</button>
+  </div>
+    </div>
+    @if (buttonDisplay==false) {
+        <button id="modify" (click)="buttonDisplay=true">modify</button>
+    }@else {
+        <button id="modify" (click)="buttonDisplay=false">undo</button>
+    }
+    
+</div>

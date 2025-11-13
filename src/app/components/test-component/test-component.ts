@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, NgModule} from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, NgModule, ElementRef} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
@@ -7,7 +7,7 @@ import { UserService } from '../../services/user-service/user-service';
 
 @Component({
   selector: 'app-test-component',
-  imports: [CommonModule,FormsModule ],
+  imports: [CommonModule,FormsModule],
   templateUrl: './test-component.html',
   styleUrl: './test-component.css'
 })
@@ -62,6 +62,35 @@ export class TestComponent implements OnInit, OnDestroy {
     console.log('Image selected:', this.imageName);
   }
 }
+
+
+  onSubmit(event: Event) {
+  const form = event.target as HTMLFormElement;
+  if (!form.checkValidity()) event.preventDefault();
+  form.classList.add('was-validated');
 }
+
+
+
+  isDarkMode: boolean = false;
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    
+    // Apply dark mode class to body
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }
+
+
+
+  isSwitch=false
+}
+
+
+
 
 
