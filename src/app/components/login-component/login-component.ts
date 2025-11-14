@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ButtonModule } from 'primeng/button';
+
 
 export interface JwtUser {
   sub: string;   
@@ -18,7 +20,7 @@ export interface JwtUser {
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, CommonModule, HttpClientModule,MatButtonModule,
-    MatInputModule,MatIconModule],
+    MatInputModule,MatIconModule,ButtonModule],
   templateUrl: `login-component.html`,
   styleUrl:`login-component.css`
 })
@@ -78,8 +80,8 @@ export class LoginComponent {
   const form = event.target as HTMLFormElement;
   const passwordInput = document.getElementById('password') as HTMLInputElement;
 
-  if (passwordInput.value.length < 6) {
-    passwordInput.setCustomValidity('Password must be at least 4 characters');
+  if (passwordInput.value.length < 4) {
+    passwordInput.setCustomValidity('Password incorect ');
   } else {
     passwordInput.setCustomValidity('');
   }
@@ -90,9 +92,9 @@ export class LoginComponent {
   
   form.classList.add('was-validated');
 }
-passsword:string=''
+  passsword:string=''
 
-showButton: boolean = false;
+  isDarkMode=false
 
 }
 

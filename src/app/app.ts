@@ -28,9 +28,12 @@ export class App {
 //tsconfig.ts : ts compiler , ts->js
 //tsconfig.app.ts:Extends base config for app code only
 //tsconfig.spec.ts:Extends base config for test only
+// ng serve → CLI → angular.json → tsconfig.json → package.json
 
 //npm (Node Package Manager)= Node’s build tool, like Maven for Java.
 //npm Registry : like maven central , the npm install from it 
 
 
-// as any: "Treat window as if it could have ANY property"
+//(object as any).object1: "Treat object as if  could have ANY property even if it's doesn't have object1"
+
+

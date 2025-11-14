@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="title">
+    <!-- <div class="title">
     <h1 > Welcom - Sign Up Page </h1>
-    </div>
+    </div> -->
     <div class="login-backround">
     <div class="login-form">
     <h2>Sign Up Now</h2>
@@ -19,7 +19,7 @@
         <img [src]="imageUrl">
     } @else {
         <label for="image-input" id="image-label">Choose image</label>
-        <p>no image chosen</p>
+        <p id="no-image-chosen">no image chosen</p>
     }
    </div>
     <p class="note" *ngIf="imageNote!==blank" id="email-note" >{{imageNote}}</p>
@@ -27,7 +27,7 @@
     <button  id="login-button" color="primary" (click)="createUser()" class="login">Sign Up</button>
     <div class="text-container">
         <p >Already a member? </p>
-        <a id="login" href="tasks" >Login Now</a>
+        <a id="login" href="tasks"  >Login Now</a>
     </div>
    </div>
    </div>

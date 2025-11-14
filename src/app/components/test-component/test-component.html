@@ -93,10 +93,6 @@ document.getElementById('file-input').addEventListener('change', function(e) {
 
 <div *ngIf="isSwitch">switch works</div>
 
-<!-- Simple toggle button -->
-<button class="btn btn-outline-secondary mb-3" (click)="toggleDarkMode()">
-  {{ isDarkMode ? '☀️ Light' : '🌙 Dark' }}
-</button>
 
 <!-- Your content -->
 <div class="container" [class.dark-mode]="isSwitch">
