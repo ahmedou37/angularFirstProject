@@ -1,8 +1,149 @@
+@import "primeicons/primeicons.css";
+/* @import "tailwindcss"; */
+
+
 body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+:root {
+  color-scheme: light !important;
+  /* GLOBAL SURFACE COLORS */
+  --p-surface-0: #ffffff !important;
+  --p-surface-50: #ffffff !important;
+  --p-surface-100: #ffffff !important;
+  --p-surface-200: #ffffff !important;
+  --p-surface-300: #ffffff !important;
+  --p-surface-400: #ffffff !important;
+  --p-surface-500: #ffffff !important;
+  --p-surface-600: #f5f5f5 !important;
+  --p-surface-700: #f0f0f0 !important;
+  --p-surface-800: #e8e8e8 !important;
+
+  /* TEXT COLORS */
+  --p-text-color: #000000 !important;
+  --p-content-color: #000000 !important;
+
+  /* BORDERS */
+  --p-content-border-color: #d1d5db !important;
+  --p-inputtext-border-color: #d1d5db !important;
+  --p-menu-border-color: #d1d5db !important;
+  --p-panel-border-color: #d1d5db !important;
+
+  /* INPUTS (InputText, Dropdown, DatePicker, MultiSelect...) */
+  --p-inputtext-background: #ffffff !important;
+  --p-inputtext-color: #000000 !important;
+  --p-inputtext-focus-background: #ffffff !important;
+
+  /* TABLE */
+  --p-datatable-background: #ffffff !important;
+  --p-datatable-header-background: #ffffff !important;
+  --p-datatable-row-background: #ffffff !important;
+  --p-datatable-row-hover-background: #f0f0f0 !important;
+
+  /* DIALOG */
+  --p-dialog-background: #ffffff !important;
+  --p-dialog-header-background: #ffffff !important;
+  --p-dialog-footer-background: #ffffff !important;
+
+  /* MENU (Menubar, Sidebar, TieredMenu, ContextMenu...) */
+  --p-menu-background: #ffffff !important;
+  --p-menuitem-background: #ffffff !important;
+  --p-menuitem-hover-background: #f0f0f0 !important;
+
+  /* CARDS & PANELS */
+  --p-card-background: #ffffff !important;
+  --p-panel-background: #ffffff !important;
+
+  /* ICONS */
+  --p-icon-color: #000000 !important;
+
+  /* DROPDOWN PANEL */
+  --p-overlay-background: #ffffff !important;
+}
+
+/* Make sure the header and body follow the same widths */
+:root {
+  --col-width: 25%;
+}
+
+.p-datatable thead th.col-25,
+.p-datatable tbody td.col-25 {
+  width: var(--col-width) !important;
+}
+
+
+.p-select-overlay {
+  background: rgb(230, 230, 230) !important;
+}
+
+
+
+/* Option row icon (checkmark or whatever icon appears) */
+.p-select-item .p-icon {
+  color: rgb(10, 10, 10) !important;
+}
+
+/* When an item is selected */
+.p-select-item.p-select-item-selected .p-icon {
+  color: rgb(50, 50, 50) !important;
+}
+
+.p-select-overlay .p-icon {
+  color: rgb(77, 76, 76) !important;
+}
+:host ::ng-deep .select{
+  color: rgb(77, 76, 76) !important;
+} 
+
+
+/* Secondory button */
+:root {
+  --secondary-button-text-color: #302e2e;
+}
+
+.p-button-secondary {
+  color: var(--secondary-button-text-color) !important;
+}
+
+
+/* Tool Tips*/
+.p-tooltip .p-tooltip-text {
+  background-color: rgb(238, 233, 233) !important;
+  color: rgb(27, 26, 26) !important;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/*Paginator*/
+p-paginator {
+  background-color: #d3d5d8;
+  
+
+  .p-paginator-page,
+  .p-paginator-first,
+  .p-paginator-prev,
+  .p-paginator-next,
+  .p-paginator-last {
+    color: #495057;
+    font-size: 16px;
+
+    &:hover {
+      background-color: #e9ecef;
+    }
+
+    &.p-highlight {
+      background-color: #aaabad;
+      color: white;
+    }
+  }
+}
+
+
+
+
 
 #createStatus .mat-mdc-select-placeholder {
   position: relative;
@@ -25,4 +166,27 @@ body {
   position: relative;
   left: 19px;
   right:0px;
+}
+
+
+.green-col {
+  background-color: green !important;
+}
+
+.red-row {
+  background-color: red !important;
+}
+
+
+
+
+
+
+
+/* Remove AG-Grid padding and allow component to stretch */
+
+
+.ag-cell-wrapper {
+  width: 100% !important;
+  padding: 0 !important;
 }

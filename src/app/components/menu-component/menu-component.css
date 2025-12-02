@@ -1,0 +1,79 @@
+.title{
+  background-color: rgb(224, 229, 245)!important;
+   color: rgb(17, 2, 2);
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+   width: 170px;
+   height: 100vh;
+   position:fixed;
+}
+
+.management{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.account{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  top:77%;
+  width: 170px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+  font-size: 17px;
+  white-space: nowrap;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+a:hover{
+    background-color: rgb(217, 218, 247);
+}
+
+i{
+  margin-left: 15px;
+}
+
+
+
+
+.botom{
+  position: fixed;
+  bottom: 16px;
+  width: 170px;
+}
+.about-user{
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  margin-left:10px;
+  margin-top: 5px;
+}
+.user-info{
+  margin-left: 5px;
+  border:11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: black;
+}
+
+.user-name{
+  font-size:18px;
+  white-space:nowrap;
+}
+.user-role{
+  font-size:14px;
+}
+
+.avatar{
+  padding-top:7px;
+}
+

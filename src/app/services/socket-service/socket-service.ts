@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 export class WebsocketService {
 
   private stompClient!: Client;
-  private notificationSubject = new Subject<any>();//Subject is both an Observable and an Observer.
+  private notificationSubject = new Subject<any>();//Subject is both an Observable and an Observer."Observer" part means it can RECEIVE data, not just emit
   public notifications$ = this.notificationSubject.asObservable();//Turns the subject into a read-only Observable.
 
   private messageSubject = new Subject<string>();
@@ -29,7 +29,7 @@ export class WebsocketService {
         //Subscribe to backend topic
         this.stompClient.subscribe('/topic/notification', (message: Message) => {
           const body = message.body ? JSON.parse(message.body) : null;
-          this.notificationSubject.next(body);
+          this.notificationSubject.next(body);//pushes a new value to all subscribers
         });
 
 

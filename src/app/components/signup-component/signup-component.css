@@ -1,101 +1,49 @@
-.container{
+.login-backround{    
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    min-height: 643px;
-    max-height: 800px;
-    overflow: hidden;
-    background-color: black;
-    /* max-height: 633px; */
-    font-size: 14px;
-    min-width: 3000px;
-}
-
-.login-backround{
-    background-size: 100% 100%;
-    display: flex;
-    justify-content: start;
-    background-color: rgb(215, 233, 250);
-    width: 100% ;
+    height: 100vh;
+    background-color: rgb(207, 207, 207);
 }
 .login-form{
-    background-color: rgb(118, 163, 247);
+    background-color: rgb(243, 243, 243);
     display: flex;
     flex-direction: column;
-    width: 70%;
-    height: 70%;
-    margin: 0 auto;
-    border-radius: 65px;
+    width: 400px;
+    min-height: 540px;
+    border-radius: 35px;
     align-items: center;
-    max-width: 370px;
-    margin-left: 40px;
-    margin-top: 60px;
-    color: white;
-    overflow: hidden;
-    position: relative;
-    left: 7%;
-}
-
-.title{
-    background-color:rgb(54, 69, 156);
-    color: white;
-    margin: 0px;
-    display: flex;
-    width: 28%;
-    max-width: 150px;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-}
-h1{
-    position: relative;
-    white-space: nowrap;
-    font-size: 55px;
-    writing-mode: vertical-rl;
-    /* transform: scaleY(-1); */
-    transform: rotate(180deg);
-}
-
+    color: black;
+    
+} 
 
 h2{
-    margin-top:  40px;
-    margin-bottom: 20px;
-    font-size: 40px;
-    color: white;
+    margin:  40px;
+    font-size: 43px;
+    color: black;
 }
 
-.login-input{
-    background-color: rgb(213, 227, 241);
-    border-radius: 10px;
-    border-color: aliceblue;
+
+.form{
+    margin-top: 20px;
+    max-width: 50%;
     display: flex;
-    width: 63%;
-    height: 9%;
-    margin-top: 10px;
-    /* margin-bottom: 10px; */
-    font-size: 20px;
-    padding-left:20px ;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 33%;
+    width: 100%;
+    min-width: 450px;
 }
-.note{
-    margin: 0px;
-    color: rgb(228, 11, 11);
-    margin-left: 8px;
+.input-field{
+    border-radius: 20px;
+    width: 70%;
 }
-#username-note{
-    padding-right: 130px;
+.invalid-feedback{
+    color: rgb(241, 72, 72);
 }
-#username-existe-note{
-    padding-right: 130px;
-}
-#email-input{
-    font-size: 16px;
-}
-#email-input::placeholder{
-    font-size: 20px;
-}
-#email-note{
-    padding-right: 160px;
-    display: block;
+.form-label{
+    color: rgb(90, 89, 89);
 }
 
 #image-container{
@@ -104,60 +52,70 @@ h2{
     width: 70%;
 }
 #image-label{
-    background-color: white;
+    background-color: #dbdbdb;
     color: black;
-    margin-top: 12px;
+    margin-top: 11px;
     margin-right: 10px;
-    margin-left: 13px;
-    font-size: 17px;
-    border-radius: 15px;
-    width: 50%;
-    height: 70%;
-    max-width: 110px;
+    margin-left: 3px;
+    font-size: 16px;
+    border-radius: 6px;
+    width: 60%;
+    max-width: 140px;
+    height:110%;
+    min-height: 40px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
 }
 #image-label:hover{
-    background-color:#c9c6c6
+    background-color:#cfcece
+}
+i{
+    margin-left: 3px;
+    margin-right: 5px;
 }
 img{
     margin-top: 5px;
+    margin-left: 20px;
     max-width: 100px;
     max-height: 100px;
+    border-radius: 10px;
+}
+#no-image-chosen{
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
 
-#login-button{
-    margin :10px;
-    background-color: blue;
-    background-color:rgb(64, 84, 202);
-    color: white;
-    width:70% ;
-    height: 12%;
-    border-radius: 15px;
-    font-size: 25px;
-    cursor: pointer;
+:host ::ng-deep .login-button .p-button{
+    background-color: #1d2fa5;
+    color: white!important;
+    width:70% !important;
+    height: 110%!important;
+    border-radius: 35px!important;
+    font-size: 21px !important;
+    margin-top: 5px;
+}
+:host ::ng-deep .login-button .p-button:hover{
+    background-color: #2840c7;
 }
 
-.login-container{
-    min-height: 59%;
-}
 
 .text-container{
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin-right:20px;
     display: flex;
     flex-direction: row;
     width: 45%;
     height: 7%;
-    margin-bottom: 30px;
 }
 #signup{
-    position: relative;
-    top: 15px;
+    margin-top: 15px;
     margin-left: 3px;
-    color: yellow;
+    color: rgb(17, 19, 173);
     text-decoration: underline;
     cursor: pointer;
     white-space: nowrap;
@@ -165,43 +123,4 @@ img{
 p{
     color: black;
     white-space: nowrap;
-}
-mat-icon{
-    margin-right: 3px;
-}
-.icon-text{
-    margin:6px;
-    font-size: 14px;
-}
-#login{
-    white-space: nowrap;
-    color: yellow;
-    margin-left: 3px;
-}
-
-
-
-::ng-deep .snackbar{
-  background-color: rgb(247, 247, 247);
-  color: rgb(0, 0, 0);
-  border-radius:6px ;
-  margin-bottom: 30px;
-}
-
-::ng-deep  .mdc-snackbar__action {
-  --mdc-text-button-hover-state-layer-color: transparent !important;
-}
-
-::ng-deep .mdc-snackbar__action:hover {
-  background-color: white !important;
-  color: #b8b1b1 !important;
-}
-
-::ng-deep  .mdc-snackbar__action:hover .mdc-button__label {
-  color: #080808 !important;
-}
-
-
-#no-image-chosen{
-    margin-top: 20px;
 }

@@ -6,8 +6,8 @@ import { DashboardComponent } from './components/dashboard-component/dashboard-c
 import { TaskComponent } from './components/task-component/task-component';
 import { AdminComponent } from './components/admin-component/admin-component';
 import { SignupComponent } from './components/signup-component/signup-component';
-import { TestComponent } from './components/test-component/test-component';
 import { UserComponent } from './components/user-component/user-component';
+import { MenuComponent } from './components/menu-component/menu-component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +16,6 @@ export const routes: Routes = [
   {path:'tasks',component:TaskComponent,canActivate:[authGuard]},
   {path:'admin',component:AdminComponent,canActivate:[authGuard]},
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
-  {path:'test',component:TestComponent},
-  {path:'users' ,component:UserComponent,canActivate:[authGuard]}
+  {path:'menu',component:MenuComponent , canActivate:[authGuard]},
+  {path:'users' ,component:UserComponent,canActivate:[authGuard]},
 ];

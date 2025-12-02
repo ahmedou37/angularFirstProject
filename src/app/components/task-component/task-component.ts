@@ -1,46 +1,80 @@
-import { Component, inject,  ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TaskService } from '../../services/task-service/task-service';
 import { Task } from '../../model/Task';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { CommonModule, NgIf } from '@angular/common';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 import { Notification } from '../../model/Notifications';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from '../../services/socket-service/socket-service';
-import { RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
+import { SelectModule } from 'primeng/select';
+import { TableModule } from 'primeng/table';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TooltipModule } from 'primeng/tooltip';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { MenuComponent } from '../menu-component/menu-component';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColDef, themeQuartz } from 'ag-grid-community';
+import { CellComponent, DialogOpener } from '../cell-component/cell-component';
+
+
 
 
 @Component({
   selector: 'app-task-component',
   standalone: true,
-  imports: [FormsModule, MatInputModule, MatTableModule, NgIf ,
-  MatSortModule,MatPaginator,MatSelectModule,MatInputModule,MatIconModule,
-  MatMenuModule,MatBadgeModule,CommonModule ,MatMenuModule ,RouterLink],
+  imports: [FormsModule,MatIconModule,MatMenuModule,MatBadgeModule,
+  ButtonModule,InputTextModule,DialogModule,SelectModule,TableModule,
+  AutoCompleteModule ,TooltipModule ,FloatLabelModule,MenuComponent,
+  OverlayBadgeModule,BadgeModule,CommonModule,AgGridAngular],
   templateUrl: './task-component.html',
   styleUrls: ['./task-component.css']
 })
-export class TaskComponent {
+export class TaskComponent implements DialogOpener{
   displayedColumns: string[] = ['id', 'title', 'description','status','deadline'];
   service=inject(TaskService);
 
   tasks:Task[]=[];
-  searchId?:number;
-  task?:Task = {
-    title: '',
-    description:'',
-    status:''
-    
+
+  theme=themeQuartz
+  
+    colDefault:ColDef={
+      flex:1,
+      filter:true,
+      floatingFilter:true,
+      cellStyle: {'border-right-color': '#e2e2e2','display':'flex','justify-content':'center'}
     }
-  status:string|null=null
-  filteredTasks:Task[]=[]
+    colDef: ColDef[] = [
+      { field:'id' },
+      { field: 'title' },
+      { field:'description'},  
+      { field:'status',
+       cellRenderer:CellComponent,
+       cellRendererParams: (params: any) => ({
+          type:'edite',
+          rowData: params.data,
+        parent:this
+        }),
+        suppressSizeToFit: true,
+        autoHeight: true
+      },
+      { field: 'deadline' }
+      
+    ];
+    pageSize=7
+    pageSizeSelector=[7,10,15]
+
+  
+
 
   updatedStatus:string|null=''
   updatedId?:number|null
@@ -50,52 +84,19 @@ export class TaskComponent {
     status:''
   }
 
+  taskIds:number[]=[]
+
+  statuses:string[]=['COMPLETED','OVERDUE','IN_PROGRESS','PENDING']
+
 
   getTasks(){
     this.service.getTasks().subscribe(data=>{
       this.tasks=data;
-      this.dataSource.data = this.tasks;
-      if (this.sort1) {
-        this.dataSource.sort = this.sort1;
-      }
-      this.dataSource.paginator = this.paginator1;
-    });
-    this.status=null;
-    this.searchId=0
-    this.isTableVisible1 = true;
-    this.isTableVisible2=false;
-    this.isTableVisible3=false;
-    this.isTableVisible4=false;
-    this.displayPlaceholder1=true;
-    this.displayPlaceholder2=true;
-    this.displayPlaceholder3=true
-  }
-
-  getTask(){
-    this.service.getTask(this.searchId).subscribe(data=>{
-    this.task=data;
-    this.isTableVisible1=false
-    this.isTableVisible3=false
-    this.isTableVisible2=true
-    this.isTableVisible4=false
     });
   }
 
-  getTasksByStatus(){
-    this.service.getTasksByStatus(this.status).subscribe(data=>{
-      this.filteredTasks=data;
-      this.isTableVisible1=false;
-      this.isTableVisible2=false;
-      this.isTableVisible3 = true;
-      this.isTableVisible4=false
-      this.dataSource1.data = this.filteredTasks;
-      if (this.sort2) {
-        this.dataSource1.sort = this.sort2;
-      }
-      this.dataSource1.paginator = this.paginator2;
-    });
-  }
-  taskIds:number[]=[]
+ 
+
   updateTaskStatus(){
     for(const t of this.tasks){
       if (t.id){this.taskIds.push(t.id)}
@@ -103,11 +104,8 @@ export class TaskComponent {
     if(this.updatedId&&this.taskIds.includes(this.updatedId)){
     this.service.updateTaskStatus(this.updatedId,this.updatedStatus).subscribe(data=>{
       this.updatedTask=data;
-      this.displayPlaceholder3=false
-      this.isTableVisible4 =true;
-     this.isTableVisible1=false;
-    this.isTableVisible2=false;
-    this.isTableVisible3=false;  
+      this.dialogVisible=false
+      this.getTasks()
     });
     }
     else{
@@ -118,32 +116,13 @@ export class TaskComponent {
   }
 
 
-  isTableVisible1: boolean = false;
-  isTableVisible2: boolean = false;
-  isTableVisible3: boolean = false;
-  isTableVisible4: boolean = false;
-
-  @ViewChild(MatSort) sort1!: MatSort;
-  @ViewChild(MatSort) sort2!: MatSort;
-  @ViewChild(MatPaginator) paginator1!: MatPaginator;
-  @ViewChild(MatPaginator) paginator2!: MatPaginator;
-  dataSource: MatTableDataSource<Task> ;
-  dataSource1: MatTableDataSource<Task> ;
 
   constructor(private websocketService: WebsocketService ,private  snackbar:MatSnackBar) {
-    this.getTasks()
-    this.dataSource = new MatTableDataSource(this.tasks);
-    this.dataSource1 = new MatTableDataSource(this.filteredTasks);
+    this.getTasks() 
   }
   
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort1;
-    this.dataSource1.sort = this.sort2;
-    this.dataSource.paginator = this.paginator1;
-    this.dataSource1.paginator = this.paginator2;
-  }
 
-  
+    notLenght:number=0
     isNotVisible:boolean=false
     notification?:Notification={
       name:'',
@@ -153,17 +132,15 @@ export class TaskComponent {
     unseenNotifications:Notification[]=[]
   
     getNotification(){
-      this.service.getNotifications().subscribe(data=>
-        {this.notifications=data;
-         this.notifications.forEach((not)=>{if(not.seen==false){this.notLenght+=1}})
-        })
+      this.service.getNotifications().subscribe(data=>{
+        this.notifications=data;
+        this.notifications.forEach((not)=>{if(not.seen==false){this.notLenght+=1}})
+      })
     }
   
     getUnseenNotification(){
-      //this.getNotification()
       this.isNotVisible=!this.isNotVisible
       this.service.getUnseenNotifications().subscribe(data=>{this.unseenNotifications=data,
-      //this.notifications?.forEach(not=>{not.seen=true}),
       this.notLenght=0
       this.service.setToSeen().subscribe(()=>this.service.resetNotLength())
       })
@@ -173,7 +150,6 @@ export class TaskComponent {
         unseen.id === notification.id
       );
     }
-    notLenght:number=0
 
     ngOnInit() {
       this.getNotification()
@@ -195,28 +171,7 @@ export class TaskComponent {
 
     numbers = new Array(100).fill(0).map((_, i) => i + 1);
 
-    statusChange(selectedValue: string) {
-      if (selectedValue === '') {
-       this.getTasks(); 
-       this.displayPlaceholder2=true
-      } else {
-        this.getTasksByStatus();
-        this.displayPlaceholder2=false
-      }
-    }   
-    idChange(selectedValue: number) {
-      if (selectedValue == 0) {
-       this.getTasks();
-       this.displayPlaceholder1=true
-      } else {
-        this.getTask();
-        this.displayPlaceholder1=false
-      }
-    }   
-    displayPlaceholder1:boolean=true
-    displayPlaceholder2:boolean=true
-    displayPlaceholder3:boolean=true
-
+    
 
     errorSnackbar(){
       this.snackbar.open("no task found with that id ","close",{
@@ -224,5 +179,12 @@ export class TaskComponent {
         panelClass:"snackbar"
       })
     }
+ 
+    dialogVisible=false
+
+  openDialog(type:string,id:number){
+    this.updatedId=id
+    this.dialogVisible=true
+  }
    
 }

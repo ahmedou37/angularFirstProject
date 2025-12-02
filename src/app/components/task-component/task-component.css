@@ -1,9 +1,10 @@
 .container{
   display: flex;
   flex-direction: row;
-  height: 100%; 
-  width: 100%;
-  min-height: 800px;
+}
+.menu{
+  min-width: 170px;
+  background-color: rgb(54, 69, 156);
 }
 
 .main{
@@ -12,158 +13,82 @@
   width: 100%;
   background-color: rgb(240, 240, 245);
 }
-
+.header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1{
+    /* white-space: nowrap; */
+    font-size: 45px;
+    display: flex;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+.buttons{
+  position:absolute;
+  left: 216px;
+  top:80px;
+}
 .tasks-list{
   position: relative;
-  margin: 0px;
+  margin-top: 0px;
   width: 100%;
   background-color: rgb(242, 242, 253);
   color: rgb(17, 16, 16);
   /* left: 10%;
   right: 10%; */
 }
-.header{
-  display: flex;
-  flex-direction: row;
-  margin-left:30px;
-  margin-top: 20px;
-  margin-right: 60px;
-  margin-bottom: 20px; 
-}
-.header-button{
-  width: 90px;
-  border-radius: 8px;
-  border-color: #eee;
-  cursor: pointer;
-  font-size: 15px;
-  margin-right: 30px;
-  /* background-color: rgb(214, 215, 219); */
-  background-color: rgb(245, 240, 240);
-  color: black;
-  max-height: 27px;
-  min-height: 34px;
-  font-size: 15px;
+
+label{
+  color: rgb(5, 5, 5);
+  font-size: medium;
+  margin-right: 10px;
 }
 
 
-#title{
-    background-color:rgb(54, 69, 156); /*#1e3a8a*/
-    color: white;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    width: 28%;
-    min-width: 170px;
-    max-width: 205px;
-    align-items: center;
-    /* justify-content: center; */
-    min-height: 100vh;
-}
-h1{
-    font-size: 33px;
-    margin-bottom: 7px;
-}
-a{
-  margin: 6px;
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
-}
-.icon-menu{
-  margin:0px;
-  padding: 0px;
-  margin-top: 5px;
-  position: relative;
-  top: 7px;
-  margin-right: 3px;
-}
-
-.menu-item{
-  margin-left: 0px;
-  font-size: 17px;
-  white-space: nowrap;
-}
-
-.filter{
-  display: flex;
-  flex-direction: column;
-}
-.cancel{
-  width: 80px;
-  border-radius: 8px;
-  border-color: #eee;
-  cursor: pointer;
-  max-height: 45px;
-  min-height: 40px;
-  min-height: 27px;
-  font-size: 15px;
-  margin-right: 2px;
-  background-color: rgb(245, 240, 240);
-  color: black;
-}
-
-#updatedStatus{
-  min-height: 18px;
-  margin-top: 7px;
-  min-width: 100px;
-  width: 87%;
-  margin-bottom: 10px;
-  margin-left: 2px;
-  margin-right: 0px;
-}
-
-input{
-  background-color: rgb(245, 240, 240);
-  color: rgb(24, 23, 23);
-  border-radius: 4px;
-  border-color: white;
-  min-height: 18px;
-  width: 90%;
-  margin-right: 0px;
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  border-left: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
 }
 
 
-::ng-deep .mat-mdc-table .mat-mdc-cell,
-::ng-deep .mat-mdc-table .mat-mdc-header-cell {
-  color: rgb(10, 10, 10) !important;
-}
-
-
-.modify {
-  background-color: rgb(42, 42, 44);
-}
-
-.modify-menu {
-  background-color: rgb(42, 42, 44) !important;
-  color: white;
-}
-
-.modify-menu .mat-menu-content {
-  background-color: rgb(42, 42, 44);
-  color: white;
-  padding: 16px;
-}
-
-.modify-menu .mat-form-field {
+:host ::ng-deep .select{
+  background-color: rgb(211, 206, 206)!important;
+  color: black!important;
+  border-radius: 10px!important;
   width: 100%;
 }
-
-
-
-::ng-deep .mat-mdc-menu-panel {
-  background-color: rgb(255, 255, 255) !important; 
-  color: white !important;
+:host ::ng-deep .select .p-placeholder {
+  color: rgb(53, 51, 51)!important;
+}
+:host ::ng-deep .select .p-select-label {
+  color: rgb(46, 44, 44) !important;
+}
+:host ::ng-deep .select .p-icon {
+  color: rgb(77, 76, 76)!important;
 }
 
-h3{
-  margin-left: 50px;
+:host ::ng-deep .dialog-select{
+  background-color: rgb(235, 231, 231)!important;
+  width: 70%!important;
+  color: black!important;
+  border-radius: 10px!important;
+}
+:host ::ng-deep .dialog-select .p-select-label {
+  color: rgb(46, 44, 44) !important;
+}
+:host ::ng-deep .dialog-select .p-icon {
+  color: rgb(77, 76, 76)!important;
 }
 
-#info{
-  position: fixed;
-  bottom: 16px;
+.dialog-button{
+  margin-top: 10px;
+  width: 94%;
+  display: flex;
+  justify-content: end;
+  gap:3px;
 }
-
 
 
 
@@ -186,6 +111,13 @@ h3{
 ::ng-deep .mat-badge-above-after .mat-badge-content {
   top: -8px !important;
   right: -8px !important;
+}
+
+::ng-deep mat-icon{
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  height: 20px!important;
 }
 /* ::ng-deep can style elements OUTSIDE your component
 Material components like datepicker are rendered outside your component in the global DOM (usually at the end of <body>). So without ::ng-deep, your component's CSS can't reach them. */
@@ -232,12 +164,11 @@ Material components like datepicker are rendered outside your component in the g
   font-size: 11px;
 }
 
-.button {
-  position: fixed;
+.notification-button {
+  position: absolute;
   /* z-index: 1000; */
   top: 16px;
   right: 16px;
-  background-color: rgb(240, 240, 245) ;
   border-color: rgb(240, 240, 245);
   cursor: pointer;
 }
@@ -267,4 +198,91 @@ Material components like datepicker are rendered outside your component in the g
 
 ::ng-deep  .mdc-snackbar__action:hover .mdc-button__label {
   color: #080808 !important;
+}
+
+
+
+
+
+
+
+
+
+  .ag-grid {
+  /* Header Styles */
+  --ag-header-background-color: rgb(228, 228, 228);
+  --ag-header-font-size: 17px;
+  --ag-header-height: 40px;
+  
+  /* Text Styles */
+  --ag-font-size: 15px;
+  --ag-font-family: Arial, sans-serif;
+  
+  /* Row Styles */
+  --ag-row-height: 43px;
+  --ag-row-hover-color: rgba(228, 228, 228, 0.3);
+  --ag-selected-row-background-color: rgba(228, 228, 228, 0.6);
+  
+  /* Border & Grid Styles */
+  --ag-border-color: #c7c7c7;
+  --ag-secondary-border-color: #a7a2a2;
+  
+  /* Vertical borders between columns */
+  --ag-cell-horizontal-border: solid 1px #d85b5b;
+  
+  /* Filter Styles - CORRECTED */
+  --ag-control-panel-background-color: rgb(39, 38, 38);
+  --ag-subheader-background-color: rgb(39, 38, 38);
+  --ag-side-button-selected-background-color: rgb(39, 38, 38);
+  --ag-filter-tool-panel-background: rgb(39, 38, 38);
+  
+  /* Pagination container */
+  --ag-panel-background-color: #3781cc;
+  --ag-control-panel-background-color: #f8f9fa;
+}
+
+
+
+/* Vertical Column Borders */
+.ag-theme-quartz .ag-cell,
+.ag-theme-quartz .ag-header-cell {
+  border-right: 1px solid #d85b5b !important;
+}
+
+/* Filter Panel */
+.ag-theme-quartz .ag-filter-toolpanel,
+.ag-theme-quartz .ag-filter-toolpanel-group-title,
+.ag-theme-quartz .ag-filter-toolpanel-instance {
+  background-color: rgb(39, 38, 38) !important;
+  color: white !important;
+}
+
+.ag-theme-quartz .ag-floating-filter-input input {
+  background-color: rgb(39, 38, 38) !important;
+  color: white !important;
+  border-color: #666 !important;
+}
+
+/* Pagination */
+.ag-theme-quartz .ag-paging-panel {
+  background-color: #3781cc !important;
+  color: white !important;
+  padding: 10px !important;
+}
+
+.ag-theme-quartz .ag-paging-button {
+  background-color: white !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+}
+
+
+::ng-deep .ag-theme-quartz .ag-cell {
+  background-color: black!important;
+  border-right: 1px solid #d42929; /* Light gray border */
+}
+
+/* Optional: Remove border from last column */
+.ag-theme-quartz .ag-row .ag-cell:last-child {
+  border-right: none;
 }

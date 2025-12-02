@@ -13,8 +13,11 @@ export class UserService {
   getUsers(){
     return this.http.get<User[]>(this.url);
   }
-  getUser(id:number|null){
+  getUserById(id:number|null){
     return this.http.get<User>(`${this.url}/${id}`)
+  }
+  getUserByName(name:string|null){
+    return this.http.get<User>(`${this.url}/name/${name}`)
   }
   createUser(user:User){
     return this.http.post<User>(this.url,user)
@@ -22,8 +25,8 @@ export class UserService {
   updateUser(user:User){
     return this.http.put<User>(this.url,user)
   }
-  deleteUser(id:number|null){
-    return this.http.delete(`${this.url}/${id}`)
+  deleteUser(id:number|any){
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' })
   }
 
 
@@ -37,7 +40,13 @@ export class UserService {
     });
   }
  
-  getImageUrl(imageName: string): string {
+  getImageUrl(imageName: string|undefined): string {
     return `http://localhost:8080/images/${imageName}`;
+  }
+
+  getImage(imageName: string|undefined){
+    return this.http.get(`http://localhost:8080/images/${imageName}`, {
+    responseType: 'blob'  // tells Angular it's a file, not JSON
+  });
   }
 }

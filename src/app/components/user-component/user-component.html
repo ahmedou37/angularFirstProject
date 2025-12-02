@@ -1,19 +1,83 @@
-<div class="container">
-    <div id="title">
-    <h1 >Manage Users</h1>
-    <div id="menu">
-    <a routerLink="/tasks" class="menu-item" style="font-size: 18px;margin-right:15px" ><mat-icon class="icon-menu">list</mat-icon>User's Taks List</a>
-    <a routerLink="/admin" class="menu-item"><mat-icon class="icon-menu">manage</mat-icon>Task Management</a>
-    <a routerLink="/dashboard" class="menu-item"><mat-icon class="icon-menu">dashboard</mat-icon>Tasks's Dashboard</a>
-    <a href="users" class="menu-item" id="login-menu"><mat-icon class="icon-menu" id="login-icon">login</mat-icon><p style="font-size: 16px;display:inline">Return to Login Page</p></a>
+ <div class="container">
+    <div class="menu">
+        <app-menu-component></app-menu-component>
     </div>
 
-    <div id="info">
-    <a style="text-decoration: underline;cursor:pointer;" >about us</a>
-    <a style="text-decoration: underline;cursor:pointer;"  >contact us</a>
-    <p style="margin-left: 20px;font-size:17px">copyright &copy; 2025</p>
+    <div class="main" >
+        <div class="header">
+           <h1>Users Management</h1> 
+        </div>
+        <ag-grid-angular
+      class="ag-theme-quartz ag-grid"
+      [theme]="theme"
+      [rowData]="users"
+      [columnDefs]="colDef"
+      [defaultColDef]="colDefault"
+      [pagination]="true"
+      [paginationPageSize]="pageSize"
+      [paginationPageSizeSelector]="pageSizeSelector"
+      domLayout="autoHeight"
+    >
+    </ag-grid-angular>
     </div>
+</div>
+
+
+
+
+
+<p-dialog position='top' header="Update User Info" [modal]="true" [(visible)]="editeDialog" [style]="{ width: '25rem' }">
+      <div style="margin-top: 5px;">
+        <label for="addedtitle" >User Name</label>
+        <input style="width:67%;margin-left:23px" class="dialog-input" pInputText id="addedtitle" [(ngModel)]="updatedUser!.name" required class="flex-auto" autocomplete="off"/>
     </div>
+    <div style="margin-top: 5px;">
+        <label for="addedDecs" >User Email</label>
+        <input style="width:67%;margin-left:23px" class="dialog-input" pInputText id="addedDesc" [(ngModel)]="updatedUser!.email" required class="flex-auto" autocomplete="off"/>
+    </div>
+    <div style="margin-top: 5px;">
+        <label for="addedDecs" >User Role</label>
+        <input style="width:67%;margin-left:29px" class="dialog-input" pInputText id="addedDesc" [(ngModel)]="updatedUser!.role" required class="flex-auto" autocomplete="off"/>
+    </div>
+    <div class="dialog-button">
+        <p-button class="cancel"  label="Cancel" severity="secondary" (click)="editeDialog=false" />
+        <p-button class="confirm" label="Confirm" (click)="updateUser()" severity="info" />
+    </div>
+</p-dialog>
+
+
+
+
+
+
+<p-dialog position='top' header="Delete Task" [modal]="true" [(visible)]="deleteDialog" [style]="{ width: '25rem' }">
+  <div style="display: flex;flex-direction:row">
+    <i style="margin-top: 15px;font-size:30px;" class="pi pi-exclamation-circle"></i>
+    <p style="font-size:19px;margin-left:20px"> Do you want to delete this User?</p>
+  </div>
+    <div class="dialog-button">
+        <p-button class="cancel"  label="Cancel" severity="secondary" (click)="deleteDialog=false" />
+        <p-button class="confirm" label="Delete" (click)="deleteUser()" severity="danger"/>
+    </div>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- </div>
     <div class="main-container">
     @if (displayUsers) {
     @for (user of users; track user.id) {
@@ -128,4 +192,4 @@
         <button id="modify" (click)="buttonDisplay=false">undo</button>
     }
     
-</div>
+</div> -->

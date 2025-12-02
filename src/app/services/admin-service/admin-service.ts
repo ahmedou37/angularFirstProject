@@ -24,7 +24,7 @@ export class AdminService {
   deleteTask(id:number|any){
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
-  assignTaskToUser(userId:number|any,taskId:number|any){
-    return this.http.post(`${this.url}/${userId}/${taskId}`,null, { responseType: 'text' });
+  assignTaskToUser(username:string|any,taskId:number|any){
+    return this.http.post(`${this.url}/${username}/${taskId}`,null, { responseType: 'text' });
   }
 }

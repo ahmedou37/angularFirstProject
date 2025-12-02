@@ -1,0 +1,183 @@
+
+@if (type === 'assign') {
+    @if (!rowData.assignedUser) {
+        <p-button 
+            id="assigne-button"  
+            (click)="parent?.openDialog('assign',rowData.id)" 
+            variant="text" 
+            severity="info" 
+            pTooltip="Assign Task To User" 
+            showDelay="1000">
+            <i class="pi pi-user-plus"></i>
+        </p-button>
+    } @else if (rowData.assignedUser?.imageName) {
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img 
+                [src]="getImageUrl(rowData.assignedUser.imageName)" 
+                style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;"
+                alt="User image">
+            <span>{{ rowData.assignedUser.name }}</span>
+        </div>
+    } 
+}
+@else if (type === 'delete') {
+    <div class="cell-container">
+    <span style="margin-left:10%">{{rowData.deadline}}</span>
+    <div style="margin-left: auto;">
+    <p-button 
+        id="delete-button" 
+        (click)="parent?.openDialog('delete',rowData.id)" 
+        icon="pi pi-trash" 
+        variant="text" 
+        severity="danger" 
+        pTooltip="Delete Task" 
+        showDelay="1000">
+    </p-button>
+    </div>
+    </div>
+}
+@else if (type === 'edite') {
+    <div class="cell-container">
+        <span style="margin-left:20%">{{rowData.status}}</span>
+        <div style="margin-left:auto">
+        <p-button 
+           id="edit-button" 
+           (click)="parent?.openDialog('',rowData.id)"  
+           icon="pi pi-pencil" 
+           variant="text" 
+           severity="info" 
+           pTooltip="Update Status" 
+           showDelay="1000">
+        </p-button>
+        </div>
+    </div>
+}
+@else if (type =='picture'){
+    <img 
+                [src]="getImageUrl(rowData.imageName)" 
+                style="width: 74px; height: 44px; border-radius: 8%;"
+                >
+}
+@else if(type=='edite-user'){
+    <div class="cell-container" >
+        <span style="margin-left:25%">{{rowData.role}}</span>
+        <div style="margin-left:auto">
+        <p-button 
+           id="edit-button" 
+           (click)="parent?.openDialog('edite',rowData.id,rowData)"  
+           icon="pi pi-pencil" 
+           variant="text" 
+           severity="info" 
+           pTooltip="Update User Info" 
+           showDelay="1000">
+        </p-button>
+    <p-button 
+        id="deletee-button" 
+        (click)="parent?.openDialog('delete',rowData.id)" 
+        icon="pi pi-trash" 
+        variant="text" 
+        severity="danger" 
+        pTooltip="Delete User" 
+        showDelay="1000">
+    </p-button>
+    </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<p-dialog
+    position="top"
+    modal="true"
+    [(visible)]="admin.dialogVisible"
+    [header]="admin.getHeader()"
+    [style]="{ width: '25rem' }"
+>
+    @switch (type) {
+
+        @case ('assign') {
+                <span class="p-text-secondary block mb-8" style="margin-top:20px">
+                    The user will be notified of the task.
+                </span>
+
+                <div style="margin-top: 22px">
+                    <label for="select">Username</label>
+
+                    <p-select
+                        id="select"
+                        [options]="admin.userNames"
+                        [(ngModel)]="admin.userName"
+                        [checkmark]="true"
+                        [showClear]="true"
+                        appendTo="body"
+                        dropdownIcon="pi pi-chevron-up"
+                        class="dialog-select"
+                        placeholder="SELECT Username">
+                    </p-select>
+                </div>
+
+
+            <div class="dialog-button">
+                <p-button label="Cancel" severity="secondary" (click)="admin.closeDialog()" />
+                <p-button label="Confirm" severity="info" (click)="admin.deleteTask()" />
+            </div>
+        }
+
+
+        @case ('delete') {
+            <div style="display: flex; flex-direction: row;">
+                <i class="pi pi-exclamation-circle" style="margin-top: 15px; font-size: 30px;"></i>
+                <p style="font-size: 19px; margin-left: 20px">
+                    Do you want to delete this Task?
+                </p>
+            </div>
+
+            <div class="dialog-button">
+                <p-button label="Cancel" severity="secondary" (click)="admin.closeDialog()" />
+                <p-button label="Delete" severity="danger" (click)="admin.deleteTask()" />
+            </div>
+        }
+
+
+        @case ('add') {
+                <div>
+                    <label for="addedtitle">Task Title</label>
+                    <input
+                        pInputText
+                        id="addedtitle"
+                        class="dialog-input"
+                        style="width:67%; margin-left:23px"
+                        [(ngModel)]="admin.addedTask!.title"
+                    />
+                </div>
+
+                <div style="margin-top: 5px;">
+                    <label for="addedDesc">Description</label>
+                    <input
+                        pInputText
+                        id="addedDesc"
+                        class="dialog-input"
+                        style="width:67%; margin-left:10px"
+                        [(ngModel)]="admin.addedTask!.description"
+                    />
+                </div>
+           
+
+            <div class="dialog-button">
+                <p-button label="Cancel" severity="secondary" (click)="admin.closeDialog()" />
+                <p-button label="Confirm" (click)="admin.addTask()" />
+            </div>
+        }
+
+    }
+    
+
+</p-dialog> -->

@@ -7,7 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+
 
 
 export interface JwtUser {
@@ -19,8 +25,9 @@ export interface JwtUser {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule,MatButtonModule,
-    MatInputModule,MatIconModule,ButtonModule],
+  imports: [FormsModule, CommonModule, HttpClientModule,
+    MatButtonModule,MatInputModule,MatIconModule,ButtonModule,
+    InputTextModule,TableModule ,ToggleSwitchModule ,FloatLabelModule],
   templateUrl: `login-component.html`,
   styleUrl:`login-component.css`
 })
@@ -30,9 +37,9 @@ export class LoginComponent {
   response = '';
   blank='';
 
-  private http = inject(HttpClient);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
+  http = inject(HttpClient);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
 
   login() {
     this.checkNote()
@@ -44,7 +51,8 @@ export class LoginComponent {
     next: (token) => {
 
       localStorage.setItem('token', token);
-      
+      console.log("route",this.route)
+      console.log("snapshot ",this.route.snapshot)
       const returnUrl = this.route.snapshot.queryParams['returnUrl'] ;//|| '/hello';
         this.router.navigate([returnUrl]);
       },
@@ -70,8 +78,8 @@ export class LoginComponent {
     if(this.name.length==0){
       this.nameNote='*username requiered'
     }
-    if(this.password.length<4){
-      this.passwordNote='*password should contains minimum 4 letters'
+    if(this.password.length==0){
+      this.passwordNote='*password required'
     }
   }
 
@@ -92,10 +100,25 @@ export class LoginComponent {
   
   form.classList.add('was-validated');
 }
-  passsword:string=''
 
-  isDarkMode=false
 
+
+
+
+
+
+
+
+
+
+
+  products = [
+    { id: 1, name: 'Laptop', category: 'Electronics', price: 999 },
+    { id: 2, name: 'Phone', category: 'Electronics', price: 599 },
+    { id: 3, name: 'Desk', category: 'Furniture', price: 299 },
+    { id: 4, name: 'Chair', category: 'Furniture', price: 149 },
+    { id: 5, name: 'Book', category: 'Education', price: 29 }
+  ];
 }
 
 // ActivatedRoute is Angular's way of giving you information about the current route/URL. It's like a "URL reader" that can tell you:

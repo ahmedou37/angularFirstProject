@@ -1,46 +1,10 @@
-#container{
-  display:flex;
-  flex-direction:row;
-  margin:0px;
-  max-height: 800px;
-  background-color: black;
+.container{
+  display: flex;
+  flex-direction: row;
 }
-#title{
-   background-color: rgb(54, 69, 156);
-   color: white;
-   margin: 0;
-   display: flex;
-   flex-direction: column;
-   width: 28%;
-   max-width: 205px;
-   align-items: center;
-}
-h1{
-   font-size: 33px;
-   margin-bottom: 7px;
-   display: flex;
-   white-space: nowrap;
-   max-width: 90%;
-   margin-right: 15px;
-}
-a{
-  margin: 6px;
-  text-decoration: none;
-  color: white;
-  font-size: 17px;
-  white-space: nowrap;
-}
-.icon-menu{
-  margin-left: 0px;
-  padding: 0px;
-  margin-top: 5px;
-  position: relative;
-  top: 7px;
-  margin-right:3px
-}
-.menu-item{
-  margin-left: 0px;
-  font-size: 17px;
+.menu{
+  min-width: 190px;
+  background-color: rgb(54, 69, 156);
 }
 
 .main{

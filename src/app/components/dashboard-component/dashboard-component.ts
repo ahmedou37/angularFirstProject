@@ -1,17 +1,17 @@
 import { Component, inject} from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartData, ChartOptions } from 'chart.js';
+import { ChartData } from 'chart.js';
 import { AdminService } from '../../services/admin-service/admin-service';
 import { Task } from '../../model/Task';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { MenuComponent } from '../menu-component/menu-component';
 
 
 
 
 @Component({
   selector: 'app-dashboard-component',
-  imports: [BaseChartDirective,MatIconModule,RouterLink],
+  imports: [BaseChartDirective,MatIconModule,MenuComponent],
   templateUrl:'./dashboard-component.html' ,
   styleUrl:'./dashboard-component.css'
 })

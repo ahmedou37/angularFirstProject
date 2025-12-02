@@ -5,9 +5,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { FormsModule} from '@angular/forms';
 
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { FileUploadModule } from 'primeng/fileupload';
+
+
+
 @Component({
   selector: 'app-signup-component',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule ,ButtonModule,
+    InputTextModule,TableModule ,ToggleSwitchModule ,
+    FloatLabelModule,FileUploadModule,ButtonModule],
   templateUrl: './signup-component.html',
   styleUrl: './signup-component.css'
 })
@@ -22,20 +33,19 @@ export class SignupComponent {
   }
 
   createUser(){
-    this.checkNote()
-    this.checkUserName(this.addedUser.name)
-    this.checkEmail()
-    console.log("emailLenght:"+this.addedUser.email.length)
     this.addImage()
-    console.log(this.emailNote)
-    if(this.checkNote()===true&&this.checkUserName(this.addedUser.name)===true&&this.checkEmail()===true&&this.addImage()==true){
-      this.userService.createUser(this.addedUser).subscribe(u=>{
-        this.signupSnackbar()
-        this.addedUser.name=''
-        this.addedUser.password=''
-        this.addedUser.email=''
-        this.imageUrl=null})
-    }
+    this.checkUsername()
+    this.checkEmail()
+    this.checkPassword()
+    if(this.checkUsername()===true&&this.checkEmail()===true&&this.checkPassword()===true&&this.addImage()==true){
+    //   this.userService.createUser(this.addedUser).subscribe(u=>{
+    //     this.signupSnackbar()
+    //     this.addedUser.name=''
+    //     this.addedUser.password=''
+    //     this.addedUser.email=''
+    //     this.imageUrl=null})
+    console.log("completeeeeeeeeeeeeeeeeeee")
+     }
   }
 
   users?:User[]
@@ -43,36 +53,43 @@ export class SignupComponent {
   passwordNote=''
   emailNote=''
   blank=''
-  nameExistNote=''
-  checkNote():boolean{
+
+  constructor(){
+    this.userService.getUsers().subscribe(data=>this.users=data)
+  }
+  
+ 
+  checkUsername():boolean{
+    console.log("method called 3")
+    console.log("users",this.users)
     this.nameNote=''
-    this.passwordNote=''
-    if(this.addedUser.name?.length==0&&this.addedUser.password?.length<4){
-      this.nameNote='*username requiered' 
-      this.passwordNote='*password should contains minimum 4 letters'
-      return false
-    }
     if(this.addedUser.name?.length==0){
-      this.nameNote='*username requiered' 
+      this.nameNote='*username requiered'
+      return false 
+    }
+    else if (this.users?.some(user => user.name === this.addedUser.name)) {
+      this.nameNote='*username already existe' 
+      return false
+    } 
+  return true
+  }
+
+  checkPassword():boolean{
+    this.passwordNote=''
+    if(this.addedUser.password?.length==0){
+      this.passwordNote='*Password requiered'
       return false
     }
-    if(this.addedUser.password?.length<4){
+    else if(this.addedUser.password?.length<4){
       this.passwordNote='*password should contains minimum 4 letters'
       return false
     }
     return true
   }
-  checkUserName(name:string):boolean{
-    this.nameExistNote=''
-    this.userService.getUsers().subscribe(data=>this.users=data)
-    const usernameExists = this.users?.some(user => user.name === name);
-    if (usernameExists) {
-      this.nameExistNote='*username already existe' 
-      return false
-    } 
-  return true
-  }
+
+
   checkEmail():boolean{
+    console.log("method called 1")
     this.emailNote=''
     if(this.addedUser.email.length==0){
       this.emailNote="*email requiered"
@@ -80,15 +97,12 @@ export class SignupComponent {
       return false
     }
     if(!(this.addedUser.email.includes('@')&&this.addedUser.email.includes('.'))){
-      this.emailNote='*email is invalid'
+      this.emailNote='*email invalid'
       return false
     }
     return true
   }
 
-  constructor(){
-    this.checkUserName(this.addedUser.name)
-  }
   signupSnackbar(){
     this.snackbar.open(`signing up succes! return to the login page and login`,`close`,{
       duration:3000,
@@ -123,6 +137,7 @@ export class SignupComponent {
   onImageSelected(event: any) {
   const file: File = event.target.files[0];
   if (file) {
+    console.log("okk")
     this.image = file;
     this.addedUser.imageName=file.name
     console.log('Image selected:', this.addedUser.imageName);
