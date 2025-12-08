@@ -18,13 +18,14 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
 
 @Component({
   selector: 'app-user-component',
   imports: [MatCardModule, MatIconModule,MatButtonModule,
     CommonModule,MatMenuModule,MatInputModule,FormsModule,MatSelectModule
     ,MatOptionModule,AgGridAngular,DialogModule,ButtonModule,TooltipModule
-    ,InputTextModule,MenuComponent],
+    ,InputTextModule,MenuComponent,SelectModule],
   templateUrl: './user-component.html',
   styleUrl: './user-component.css'
 })
@@ -59,10 +60,12 @@ export class UserComponent implements DialogOpener{
       flex:1,
       filter:true,
       floatingFilter:true,
-      cellStyle: {'border-right-color': '#e2e2e2','display':'flex','justify-content':'center'}
+      cellStyle: {'border-right-color': '#e2e2e2','display':'flex'}
     }
     colDef: ColDef[] = [
-      { field:'id' },
+      { field:'id' ,
+        flex:0.6
+      },
       { field:'picture',
         flex:0.6,
         cellStyle:{'margin':'3px'},

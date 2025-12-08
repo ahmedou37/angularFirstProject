@@ -1,0 +1,15 @@
+@if(filterType=='date'){
+    <input 
+        type="date"
+        [(ngModel)]="currentValue"
+        (input)="onInputChange($event)"
+    />
+}
+@else {
+    <input 
+        type="text"
+        [placeholder]="placeholder"
+        [value]="currentValue"
+        (input)="onInputChange($event)"
+      />
+}

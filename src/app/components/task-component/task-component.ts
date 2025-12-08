@@ -51,7 +51,7 @@ export class TaskComponent implements DialogOpener{
       flex:1,
       filter:true,
       floatingFilter:true,
-      cellStyle: {'border-right-color': '#e2e2e2','display':'flex','justify-content':'center'}
+      cellStyle: {'border-right-color': '#e2e2e2','display':'flex'}
     }
     colDef: ColDef[] = [
       { field:'id' },
@@ -62,10 +62,17 @@ export class TaskComponent implements DialogOpener{
        cellRendererParams: (params: any) => ({
           type:'edite',
           rowData: params.data,
-        parent:this
+          parent:this
         }),
         suppressSizeToFit: true,
-        autoHeight: true
+        autoHeight: true,
+        valueGetter: (params) => params.data.status?.name || '',
+        valueFormatter: (p) => {
+  if (p.value === 'IN_PROGRESS') {
+    return 'IN PROGRESS';
+  }
+  return p.value
+}
       },
       { field: 'deadline' }
       
@@ -86,8 +93,13 @@ export class TaskComponent implements DialogOpener{
 
   taskIds:number[]=[]
 
-  statuses:string[]=['COMPLETED','OVERDUE','IN_PROGRESS','PENDING']
 
+  statusOptions = [
+  { label: 'COMPLETED', value: 'COMPLETED' },
+  { label: 'OVERDUE', value: 'OVERDUE' },
+  { label: 'IN PROGRESS', value: 'IN_PROGRESS' },
+  { label: 'PENDING', value: 'PENDING' }
+];
 
   getTasks(){
     this.service.getTasks().subscribe(data=>{

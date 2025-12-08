@@ -21,14 +21,17 @@ import { MenuComponent } from '../menu-component/menu-component';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, themeQuartz } from 'ag-grid-community';
 import { CellComponent, DialogOpener } from '../cell-component/cell-component';
+import { DatePickerModule } from 'primeng/datepicker';
+import { FilterCellComponent } from '../filter-cell-component/filter-cell-component';
+import { FloatingFilterComponent } from '../flaoting-filter-component/flaoting-filter-component';
 
 
 @Component({
   selector: 'app-admin-component',
   imports: [FormsModule,CommonModule,ButtonModule,InputTextModule
    ,DialogModule,SelectModule,TableModule,AutoCompleteModule ,
-   TooltipModule ,FloatLabelModule ,MenuComponent,
-   AgGridAngular
+   TooltipModule ,FloatLabelModule ,MenuComponent,AgGridAngular,
+   DatePickerModule
   ],
   templateUrl: `./admin-component.html`,
   styleUrl: './admin-component.css'
@@ -53,8 +56,8 @@ export class AdminComponent implements DialogOpener {
 
   users:User[]=[]
   userIds:number[]=[]
-  userName:string=''
-  userNames:string[]=[]
+  userName:string|null=null
+  userNames: { label: string; value: string }[] = [];
   userService=inject(UserService)
 
   statuses:string[]=['COMPLETED','OVERDUE','IN_PROGRESS','PENDING']
@@ -65,18 +68,26 @@ export class AdminComponent implements DialogOpener {
     flex:1,
     filter:true,
     floatingFilter:true,
-    cellStyle: {'border-right-color': '#e2e2e2','display':'flex','justify-content':'center'}
+    headerStyle:{'border-right-color': '#e2e2e2','display':'flex','justify-content':'center','align-items':'center'},
+    cellStyle: {'border-right-color': '#e2e2e2','display':'flex'}
   }
   colDef: ColDef[] = [
-    { field:'id' },
+    { field:'id',
+      filter:FilterCellComponent,
+      floatingFilterComponent:FloatingFilterComponent,
+      filterParams:{type:'number',placeholder:'search for id...'}
+     },
     { field: 'title' },
     { field:'description',
-      flex:1.3
+      flex:1.3,
+      filter:FilterCellComponent,
+      floatingFilterComponent:FloatingFilterComponent,
+      filterParams:{type:'text',placeholder:'search for description.'}
     },
-    { 
-    
+    {  
   field: 'assignedUser',
   headerName: 'Assigned User',
+  valueGetter: (params) => params.data.assignedUser?.name || '',
   cellRenderer:CellComponent,
   cellRendererParams: (params: any) => ({
     type:'assign',
@@ -101,7 +112,10 @@ export class AdminComponent implements DialogOpener {
         parent:this
       }),
       suppressSizeToFit: true,
-        autoHeight: true
+        autoHeight: true,
+        filter:FilterCellComponent,
+      floatingFilterComponent:FloatingFilterComponent,
+      filterParams:{type:'date'},
     }
   ];
   pageSize=7
@@ -133,7 +147,7 @@ export class AdminComponent implements DialogOpener {
     }else{
     this.service.assignTaskToUser(this.userName, this.taskId).subscribe(data => {
       this.assignedSnackbar(this.userId,this.taskId)
-      this.userName=''
+      this.userName=null
       this.assigneVisible=false
       this.getTasks()
       this.closeDialog()
@@ -153,7 +167,7 @@ export class AdminComponent implements DialogOpener {
       this.addSnackbar(this.addedTask?.title)
       if(this.addedTask?.title){this.addedTask.title=''}
       if(this.addedTask?.description){this.addedTask.description=''}
-      if(this.addedTask?.status){this.addedTask.status=''}
+      if(this.addedTask?.deadline){this.addedTask.deadline=new Date}
       this.addVisible=false
       this.getTasks()
       this.closeDialog()
@@ -182,7 +196,11 @@ export class AdminComponent implements DialogOpener {
     this.userService.getUsers().subscribe(data=>{
     this.users=data;
     this.users.forEach(i=>{if(i.id){this.userIds.push(i.id)}})
-    this.users.forEach(i=>{if(i.name){this.userNames.push(i.name)}})
+    
+      this.userNames = this.users.map(u => ({
+    label: u.name,
+    value: u.name
+  }));
     }) 
   }
 

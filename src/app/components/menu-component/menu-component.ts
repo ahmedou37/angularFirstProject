@@ -54,11 +54,6 @@ export class MenuComponent {
     ]
   }
 ];
-  logout(){
-
-    console.log(console.log("imageUrl",this.user.imageName))
-    console.log(console.log("this image", this.imageUrl))
-  }
 
     user:User={name:'',password:'',email:''}
     token=localStorage.getItem('token')??'';
@@ -70,14 +65,22 @@ export class MenuComponent {
 
 
    constructor(private userService:UserService){
-      // this.getImage("Screenshot (1).png")
-
-    userService.getUserByName(this.jwtuser.sub).subscribe(data=>{this.user=data,console.log('data',this.user),   console.log(userService.getImageUrl("this"+this.user.imageName)),console.log("imageUrl",this.imageUrl),console.log("image",this.user.imageName)})
+    userService.getUserByName(this.jwtuser.sub).subscribe(data=>{this.user=data,this.getImage()})
    }
 
    getImageUrl(){
     return this.userService.getImageUrl(this.user.imageName);
    }
+
+
+   imageeUrl:any
+
+   getImage(){
+    this.userService.getImage(this.user.imageName).subscribe(image=>{
+      this.imageeUrl=URL.createObjectURL(image)
+    })
+   }
+
 
    imageTest: string | null = null; // Store the URL, not the blob
 

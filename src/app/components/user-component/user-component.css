@@ -186,9 +186,10 @@ h4{
 
  .ag-grid {
   /* Header Styles */
-  --ag-header-background-color: rgb(228, 228, 228);
+  --ag-header-background-color: rgb(248, 248, 248);
   --ag-header-font-size: 17px;
   --ag-header-height: 40px;
+  --ag-header-font-family:blond;
   
   /* Text Styles */
   --ag-font-size: 15px;
@@ -270,4 +271,35 @@ h4{
   display: flex;
   justify-content: end;
   gap:3px;
+}
+
+
+
+:host ::ng-deep .select{
+  background-color: rgb(211, 206, 206)!important;
+  color: black!important;
+  border-radius: 10px!important;
+  width: 100%;
+}
+:host ::ng-deep .select .p-placeholder {
+  color: rgb(53, 51, 51)!important;
+}
+:host ::ng-deep .select .p-select-label {
+  color: rgb(46, 44, 44) !important;
+}
+:host ::ng-deep .select .p-icon {
+  color: rgb(77, 76, 76)!important;
+}
+
+:host ::ng-deep .dialog-select{
+  background-color: rgb(238, 238, 238)!important;
+  width: 70%!important;
+  color: black!important;
+  border-radius: 10px!important;
+}
+:host ::ng-deep .dialog-select .p-select-label {
+  color: rgb(46, 44, 44) !important;
+}
+:host ::ng-deep .dialog-select .p-icon {
+  color: rgb(255, 248, 248)!important;
 }

@@ -10,7 +10,7 @@
     
     </p-float-label>
     <p-float-label variant="in" >
-    <input pInputText class="input-field" type="email" id="email" [(ngModel)]="addedUser.email" name="email"  required email>
+    <input pInputText class="input-field" type="email" id="email" [(ngModel)]="addedUser.email" name="email" email required>
     <label for="email" class="form-label">Email</label>
     @if (emailNote){<div class="invalid-feedback">{{emailNote}}</div>}
     </p-float-label>

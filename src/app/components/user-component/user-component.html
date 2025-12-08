@@ -36,8 +36,19 @@
         <input style="width:67%;margin-left:23px" class="dialog-input" pInputText id="addedDesc" [(ngModel)]="updatedUser!.email" required class="flex-auto" autocomplete="off"/>
     </div>
     <div style="margin-top: 5px;">
-        <label for="addedDecs" >User Role</label>
-        <input style="width:67%;margin-left:29px" class="dialog-input" pInputText id="addedDesc" [(ngModel)]="updatedUser!.role" required class="flex-auto" autocomplete="off"/>
+      <label for="select">User Role</label>
+        <p-select
+            style="margin-left: 25px;"
+            id="select"
+            [options]="['USER','ADMIN']"
+            [(ngModel)]="updatedUser!.role"
+            [checkmark]="true"
+            [showClear]="true"
+            appendTo="body"
+            dropdownIcon="pi pi-chevron-up"
+            class="dialog-select"
+            placeholder="SELECT STATUS">
+        </p-select>
     </div>
     <div class="dialog-button">
         <p-button class="cancel"  label="Cancel" severity="secondary" (click)="editeDialog=false" />
@@ -50,10 +61,10 @@
 
 
 
-<p-dialog position='top' header="Delete Task" [modal]="true" [(visible)]="deleteDialog" [style]="{ width: '25rem' }">
+<p-dialog position='top' header="Delete User" [modal]="true" [(visible)]="deleteDialog" [style]="{ width: '25rem' }">
   <div style="display: flex;flex-direction:row">
-    <i style="margin-top: 15px;font-size:30px;" class="pi pi-exclamation-circle"></i>
-    <p style="font-size:19px;margin-left:20px"> Do you want to delete this User?</p>
+    <i style="margin-top: 15px;font-size:25px;" class="pi pi-exclamation-circle"></i>
+    <p style="font-size:17px;margin-left:20px"> Do you want to delete this User?</p>
   </div>
     <div class="dialog-button">
         <p-button class="cancel"  label="Cancel" severity="secondary" (click)="deleteDialog=false" />

@@ -48,4 +48,27 @@ export class CellComponent implements ICellRendererAngularComp {
     return this.userService.getImageUrl(imageName);
   }
 
+  imageUrl:any
+  // Add this cache at the top of your component
+private imageCache = new Map<string, string>();
+
+getImage(imageName: string): string {
+  // If no imageName, return empty
+  if (!imageName) return '';
+  
+  // If already cached, return cached URL
+  if (this.imageCache.has(imageName)) {
+    return this.imageCache.get(imageName)!;
+  }
+  
+  // If not cached, start loading and return placeholder
+  this.userService.getImage(imageName).subscribe(blob => {
+    const url = URL.createObjectURL(blob);
+    this.imageCache.set(imageName, url);
+    // Optional: trigger UI update if needed
+  });
+  
+  // Return empty string while loading
+  return '';
+}
 }

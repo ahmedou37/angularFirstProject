@@ -11,9 +11,9 @@
             <i class="pi pi-user-plus"></i>
         </p-button>
     } @else if (rowData.assignedUser?.imageName) {
-        <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="margin-left:20px;display: flex; align-items: center; gap: 10px;">
             <img 
-                [src]="getImageUrl(rowData.assignedUser.imageName)" 
+                [src]="getImage(rowData.assignedUser.imageName)" 
                 style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;"
                 alt="User image">
             <span>{{ rowData.assignedUser.name }}</span>
@@ -22,7 +22,7 @@
 }
 @else if (type === 'delete') {
     <div class="cell-container">
-    <span style="margin-left:10%">{{rowData.deadline}}</span>
+    <span >{{rowData.deadline}}</span>
     <div style="margin-left: auto;">
     <p-button 
         id="delete-button" 
@@ -38,7 +38,7 @@
 }
 @else if (type === 'edite') {
     <div class="cell-container">
-        <span style="margin-left:20%">{{rowData.status}}</span>
+        <span>{{rowData.status}}</span>
         <div style="margin-left:auto">
         <p-button 
            id="edit-button" 
@@ -54,13 +54,13 @@
 }
 @else if (type =='picture'){
     <img 
-                [src]="getImageUrl(rowData.imageName)" 
+                [src]="getImage(rowData.imageName)" 
                 style="width: 74px; height: 44px; border-radius: 8%;"
                 >
 }
 @else if(type=='edite-user'){
     <div class="cell-container" >
-        <span style="margin-left:25%">{{rowData.role}}</span>
+        <span style="margin-left:5%">{{rowData.role}}</span>
         <div style="margin-left:auto">
         <p-button 
            id="edit-button" 

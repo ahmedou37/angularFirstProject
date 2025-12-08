@@ -40,9 +40,12 @@ export class UserService {
     });
   }
  
-  getImageUrl(imageName: string|undefined): string {
-    return `http://localhost:8080/images/${imageName}`;
-  }
+  getImageUrl(imageName: string | undefined): string {
+  const token = localStorage.getItem('token');
+  if (!imageName) return '';
+  
+  return `http://localhost:8080/images/${imageName}?token=${token}`;
+}
 
   getImage(imageName: string|undefined){
     return this.http.get(`http://localhost:8080/images/${imageName}`, {

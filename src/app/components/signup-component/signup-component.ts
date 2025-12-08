@@ -77,7 +77,7 @@ export class SignupComponent {
   checkPassword():boolean{
     this.passwordNote=''
     if(this.addedUser.password?.length==0){
-      this.passwordNote='*Password requiered'
+      this.passwordNote='*password requiered'
       return false
     }
     else if(this.addedUser.password?.length<4){
